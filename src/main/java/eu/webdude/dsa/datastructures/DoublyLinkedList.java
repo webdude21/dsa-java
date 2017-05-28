@@ -1,4 +1,4 @@
-package eu.webdude.dsa;
+package eu.webdude.dsa.datastructures;
 
 import java.util.ArrayList;
 import java.util.Iterator;
