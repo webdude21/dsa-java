@@ -17,36 +17,58 @@ public class DoublyLinkedList<E> implements Iterable<E> {
 
 	public void addFirst(E val) {
 		Node<E> oldHead = head;
-		head = new Node<E>(val, oldHead, null);
-		size++;
-	}
-
-	private void handleFirstElement(Node<E> el) {
-		if (size() != 0) {
-			return;
+		head = new Node<>(val, oldHead, null);
+		handleFirstElement(head);
+		if (oldHead != null) {
+			head.setNext(oldHead);
+			oldHead.setPrev(head);
 		}
-
-		head = el;
-		tail = el;
+		size++;
 	}
 
 	public void addLast(E val) {
 		Node<E> oldTail = tail;
-		tail = new Node<E>(val, null, oldTail);
+		tail = new Node<>(val, null, oldTail);
+		handleFirstElement(tail);
+		if (oldTail != null) {
+			tail.setPrev(oldTail);
+			oldTail.setNext(tail);
+		}
 		size++;
 	}
 
 	public E removeFirst() {
-		throw new UnsupportedOperationException();
+		validateRemoveOperation();
+		E result = head.value;
+		head = head.getNext();
+
+		if (head != null) {
+			head.setPrev(null);
+		}
+
+		size--;
+
+		handleLastElementRemoval();
+		return result;
 	}
 
 	public E removeLast() {
-		throw new UnsupportedOperationException();
+		validateRemoveOperation();
+		E result = tail.value;
+		tail = tail.getPrev();
+
+		if (tail != null) {
+			tail.setNext(null);
+		}
+
+		size--;
+		handleLastElementRemoval();
+		return result;
 	}
 
 	@SuppressWarnings("unchecked")
 	public E[] toArray() {
-		ArrayList<E> list = new ArrayList<E>();
+		ArrayList<E> list = new ArrayList<>();
 		this.forEach(list::add);
 		return (E[]) list.toArray();
 	}
@@ -54,8 +76,6 @@ public class DoublyLinkedList<E> implements Iterable<E> {
 	@Override
 	public Iterator<E> iterator() {
 		return new Iterator<E>() {
-			private int idx;
-
 			private Node<E> current = head;
 
 			@Override
@@ -72,12 +92,37 @@ public class DoublyLinkedList<E> implements Iterable<E> {
 		};
 	}
 
+	private void handleFirstElement(Node<E> el) {
+		if (size() != 0) {
+			return;
+		}
+
+		el.setNext(null);
+		el.setPrev(null);
+
+		head = el;
+		tail = el;
+	}
+
+	private void handleLastElementRemoval() {
+		if (size() == 0) {
+			head = null;
+			tail = null;
+		}
+	}
+
+	private void validateRemoveOperation() {
+		if (this.size() == 0) {
+			throw new IllegalArgumentException();
+		}
+	}
+
 	public class Node<T> {
+		private final T value;
+
 		private Node<T> next;
 
 		private Node<T> prev;
-
-		private final T value;
 
 		public Node(T value, Node<T> next, Node<T> previous) {
 			this.value = value;
