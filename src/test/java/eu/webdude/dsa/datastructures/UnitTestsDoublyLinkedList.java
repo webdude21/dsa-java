@@ -1,6 +1,5 @@
-package eu.webdude.dsa;
+package eu.webdude.dsa.datastructures;
 
-import eu.webdude.dsa.datastructures.DoublyLinkedList;
 import org.junit.Assert;
 import org.junit.Test;
 
