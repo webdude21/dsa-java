@@ -53,10 +53,11 @@ public class LinkedListTests {
 			list.addFirst(i);
 		}
 
-		int expected = 99;
+		int expected = 0;
 		for (Integer item : list) {
-			Assert.assertEquals(expected--, list.size());
+			expected++;
 		}
+		Assert.assertEquals(expected, list.size());
 	}
 
 	@Test
@@ -68,9 +69,12 @@ public class LinkedListTests {
 		}
 
 		int expected = 0;
+
 		for (Integer item : list) {
-			Assert.assertEquals(expected++, list.size());
+			expected++;
 		}
+
+		Assert.assertEquals(expected, list.size());
 	}
 
 	@Test
