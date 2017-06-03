@@ -6,7 +6,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UnitTestsDoublyLinkedList {
+public class DoublyLinkedListTests {
 
 	@Test
 	public void addFirst_emptyList_shouldAddElement() {
