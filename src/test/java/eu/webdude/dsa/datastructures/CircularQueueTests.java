@@ -92,8 +92,8 @@ public class CircularQueueTests {
 
 		CircularQueue<Object> queue = new CircularQueue<>();
 
-		for (int i = 0; i < array.length; i++) {
-			queue.enqueue(array[i]);
+		for (Object anArray : array) {
+			queue.enqueue(anArray);
 		}
 
 		Object[] arrayFromQueue = queue.toArray();
