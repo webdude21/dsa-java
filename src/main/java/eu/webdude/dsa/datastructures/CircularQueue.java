@@ -45,13 +45,6 @@ public class CircularQueue<E> {
 		return result;
 	}
 
-	private void ensureQueueIsNotEmpty() {
-		if (size == 0){
-			throw new IllegalArgumentException("The queue is empty. Nothing to dequeue");
-		}
-
-	}
-
 	@SuppressWarnings("unchecked")
 	public E[] toArray() {
 		E[] resultArray = (E[]) new Object[size];
@@ -64,6 +57,13 @@ public class CircularQueue<E> {
 		}
 
 		return resultArray;
+	}
+
+	private void ensureQueueIsNotEmpty() {
+		if (size == 0) {
+			throw new IllegalArgumentException("The queue is empty. Nothing to dequeue");
+		}
+
 	}
 
 	@SuppressWarnings("unchecked")
@@ -128,9 +128,5 @@ public class CircularQueue<E> {
 		} else {
 			startIndex++;
 		}
-	}
-
-	private void setSize(int size) {
-		this.size = size;
 	}
 }
