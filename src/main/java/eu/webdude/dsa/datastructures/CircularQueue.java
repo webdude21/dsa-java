@@ -110,23 +110,29 @@ public class CircularQueue<E> {
 		}
 	}
 
-	private void moveTail() {
-		if (endIndex == startIndex - 1) {
-			return;
+	private boolean doIndecesOverlap() {
+		return endIndex == startIndex - 1;
+	}
+
+	private int incrementPointer(int pointer) {
+		if (doIndecesOverlap()) {
+			return pointer;
 		}
 
-		if (endIndex == store.length - 1) {
-			endIndex = 0;
+		if (pointer == store.length - 1) {
+			pointer = 0;
 		} else {
-			endIndex++;
+			pointer++;
 		}
+
+		return pointer;
+	}
+
+	private void moveTail() {
+		endIndex = incrementPointer(endIndex);
 	}
 
 	private void moveHead() {
-		if (startIndex == store.length - 1) {
-			startIndex = 0;
-		} else {
-			startIndex++;
-		}
+		startIndex = incrementPointer(startIndex);
 	}
 }
