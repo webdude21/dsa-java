@@ -8,9 +8,9 @@ public class CircularQueue<E> {
 
 	private int capacity;
 
-	private int startIndex;
+	private int headPointer;
 
-	private int endIndex;
+	private int tailPointer;
 
 	private E[] store;
 
@@ -32,16 +32,16 @@ public class CircularQueue<E> {
 
 	public void enqueue(E element) {
 		ensureCapacity();
-		store[endIndex] = element;
+		store[tailPointer] = element;
 		size++;
-		endIndex = incrementPointer(endIndex, store);
+		tailPointer = incrementPointer(tailPointer, store);
 	}
 
 	public E dequeue() {
 		ensureQueueIsNotEmpty();
-		E result = store[startIndex];
+		E result = store[headPointer];
 		size--;
-		startIndex = incrementPointer(startIndex, store);
+		headPointer = incrementPointer(headPointer, store);
 		return result;
 	}
 
@@ -49,7 +49,7 @@ public class CircularQueue<E> {
 	public E[] toArray() {
 		E[] resultArray = (E[]) new Object[size];
 
-		int currentIndex = startIndex;
+		int currentIndex = headPointer;
 
 		for (int i = 0; i < size; i++) {
 			resultArray[i] = store[currentIndex];
@@ -70,8 +70,8 @@ public class CircularQueue<E> {
 	private E[] initStore() {
 		size = 0;
 		store = (E[]) new Object[capacity];
-		startIndex = capacity / 2;
-		endIndex = startIndex;
+		headPointer = capacity / 2;
+		tailPointer = headPointer;
 		return store;
 	}
 
@@ -83,7 +83,7 @@ public class CircularQueue<E> {
 		capacity *= 2;
 
 		E[] oldStore = store;
-		int currentIndex = startIndex;
+		int currentIndex = headPointer;
 
 		initStore();
 
@@ -94,7 +94,7 @@ public class CircularQueue<E> {
 	}
 
 	private boolean doIndecesOverlap() {
-		return endIndex == startIndex - 1;
+		return tailPointer == headPointer - 1;
 	}
 
 	private int incrementPointer(int pointer, E[] store) {
