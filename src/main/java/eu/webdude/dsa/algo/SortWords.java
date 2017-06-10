@@ -1,4 +1,4 @@
-package eu.webdude.algo;
+package eu.webdude.dsa.algo;
 
 import java.util.Arrays;
 import java.util.Scanner;
