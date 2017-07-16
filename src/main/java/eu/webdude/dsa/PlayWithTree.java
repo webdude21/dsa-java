@@ -1,4 +1,7 @@
-package eu.webdude.dsa.datastructures;
+package eu.webdude.dsa;
+
+import eu.webdude.dsa.datastructures.BinaryTree;
+import eu.webdude.dsa.datastructures.Tree;
 
 public class PlayWithTree {
 
