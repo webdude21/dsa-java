@@ -146,7 +146,7 @@ public class BinarySearchTreeTests {
         Iterable<Integer> range = bst.range(12, 12);
 
         int index = 0;
-        Integer[] values = new Integer[] { 12 };
+        Integer[] values = new Integer[]{12};
         for (Integer value : range) {
             Assert.assertEquals(values[index], value);
         }
