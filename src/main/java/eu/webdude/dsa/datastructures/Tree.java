@@ -2,69 +2,109 @@ package eu.webdude.dsa.datastructures;
 
 import java.util.*;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 public class Tree<T extends Comparable<T>> implements Comparable<Tree<T>> {
 
-	private final T value;
+    private final T value;
 
-	private final List<Tree<T>> children;
+    private Tree<T> parent;
 
-	public Tree(T value, Tree<T>... children) {
-		this.value = value;
-		this.children = Arrays.asList(children);
-	}
+    private final List<Tree<T>> children;
+    private Object leafs;
 
-	public String print(int indent, StringBuilder builder) {
-		builder.append(new String(new char[indent]).replace("\0", "  "));
-		builder.append(getValue());
-		builder.append(System.lineSeparator());
-		getChildren().forEach(x -> x.print(indent + 1, builder));
-		return builder.toString();
-	}
+    public Tree(T value, Tree<T>... children) {
+        this.value = value;
+        this.children = Arrays.asList(children);
+        this.children.forEach(x -> x.setParent(this));
+    }
 
-	public void each(Consumer<T> consumer) {
-		consumer.accept(getValue());
-		getChildren().forEach(x -> x.each(consumer));
-	}
+    public boolean hasDescendants() {
+        return getChildren().size() != 0;
+    }
 
-	public Iterable<T> orderDFS() {
-		LinkedList<T> result = new LinkedList<>();
-		Stack<Tree<T>> stack = new Stack<>();
-		stack.push(this);
+    public Tree<T> getRoot() {
+        Tree<T> rootCandidate = getParent();
+        return rootCandidate == null ? this : rootCandidate.getRoot();
+    }
 
-		while (stack.size() > 0) {
-			Tree<T> currentOne = stack.pop();
-			result.addFirst(currentOne.getValue());
-			currentOne.getChildren().forEach(stack::push);
-		}
+    public String print(int indent, StringBuilder builder) {
+        builder.append(new String(new char[indent]).replace("\0", "  "));
+        builder.append(getValue());
+        builder.append(System.lineSeparator());
+        getChildren().forEach(x -> x.print(indent + 1, builder));
+        return builder.toString();
+    }
 
-		return result;
-	}
+    public void each(Consumer<T> consumer) {
+        consumer.accept(getValue());
+        getChildren().forEach(x -> x.each(consumer));
+    }
 
-	public Iterable<T> orderBFS() {
-		ArrayList<T> result = new ArrayList<>();
-		Queue<Tree<T>> queue = new ArrayDeque<>();
-		queue.add(this);
+    public Iterable<T> orderDFS() {
+        LinkedList<T> result = new LinkedList<>();
+        Stack<Tree<T>> stack = new Stack<>();
+        stack.push(this);
 
-		while (queue.size() > 0) {
-			Tree<T> currentOne = queue.remove();
-			result.add(currentOne.getValue());
-			queue.addAll(currentOne.getChildren());
-		}
+        while (stack.size() > 0) {
+            Tree<T> currentOne = stack.pop();
+            result.addFirst(currentOne.getValue());
+            currentOne.getChildren().forEach(stack::push);
+        }
 
-		return result;
-	}
+        return result;
+    }
 
-	public List<Tree<T>> getChildren() {
-		return children;
-	}
+    public Iterable<T> orderBFS() {
+        ArrayList<T> result = new ArrayList<>();
+        Queue<Tree<T>> queue = new ArrayDeque<>();
+        queue.add(this);
 
-	public T getValue() {
-		return value;
-	}
+        while (queue.size() > 0) {
+            Tree<T> currentOne = queue.remove();
+            result.add(currentOne.getValue());
+            queue.addAll(currentOne.getChildren());
+        }
 
-	@Override
-	public int compareTo(Tree<T> o) {
-		return this.getValue().compareTo(o.getValue());
-	}
+        return result;
+    }
+
+    public List<Tree<T>> getChildren() {
+        return children;
+    }
+
+    public T getValue() {
+        return value;
+    }
+
+    @Override
+    public int compareTo(Tree<T> o) {
+        return this.getValue().compareTo(o.getValue());
+    }
+
+    public Tree<T> getParent() {
+        return parent;
+    }
+
+    public void setParent(Tree<T> parent) {
+        this.parent = parent;
+    }
+
+    public List<Tree<T>> getLeafs() {
+        ArrayList<Tree<T>> list = new ArrayList<>();
+
+        if (!hasDescendants()) {
+            list.add(this);
+        } else {
+            List<Tree<T>> leafs = getChildren()
+                    .stream()
+                    .map(Tree::getLeafs)
+                    .flatMap(Collection::stream)
+                    .collect(Collectors.toList());
+
+            list.addAll(leafs);
+        }
+
+        return list;
+    }
 }

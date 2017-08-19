@@ -1,7 +1,10 @@
 package eu.webdude.dsa;
 
+import com.sun.deploy.util.StringUtils;
 import eu.webdude.dsa.datastructures.BinaryTree;
 import eu.webdude.dsa.datastructures.Tree;
+
+import java.util.stream.Collectors;
 
 public class PlayWithTree {
 
@@ -20,6 +23,13 @@ public class PlayWithTree {
         System.out.println("Tree (indented):");
         String output = tree.print(0, new StringBuilder());
         System.out.println(output);
+
+        System.out.printf("Root Node is: %s%n", tree.getRoot().getValue());
+        System.out.printf("Leaf nodes are: %s%n", StringUtils.join(tree.getLeafs()
+                .stream()
+                .map(Tree::getValue)
+                .map(Object::toString)
+                .collect(Collectors.toList()), ", "));
 
         System.out.println("Tree nodes:");
         tree.each(e -> System.out.print(" " + e));
