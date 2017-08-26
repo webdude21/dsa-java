@@ -6,8 +6,8 @@ public class BinaryTree<T> {
 
     private BinaryTree<T> parent;
     private T value;
-    private BinaryTree<T> leftChild;
-    private BinaryTree<T> rightChild;
+    private BinaryTree<T> left;
+    private BinaryTree<T> right;
 
     public BinaryTree(T value) {
         this.value = value;
@@ -15,13 +15,13 @@ public class BinaryTree<T> {
 
     public BinaryTree(T value, BinaryTree<T> child) {
         this.value = value;
-        this.leftChild = child;
+        this.left = child;
     }
 
-    public BinaryTree(T value, BinaryTree<T> leftChild, BinaryTree<T> rightCHild) {
+    public BinaryTree(T value, BinaryTree<T> left, BinaryTree<T> right) {
         this.value = value;
-        this.leftChild = leftChild;
-        this.rightChild = rightCHild;
+        this.left = left;
+        this.right = right;
     }
 
     public T getValue() {
@@ -40,20 +40,20 @@ public class BinaryTree<T> {
         this.parent = parent;
     }
 
-    public BinaryTree<T> getLeftChild() {
-        return leftChild;
+    public BinaryTree<T> getLeft() {
+        return left;
     }
 
-    public void setLeftChild(BinaryTree<T> leftChild) {
-        this.leftChild = leftChild;
+    public void setLeft(BinaryTree<T> left) {
+        this.left = left;
     }
 
-    public BinaryTree<T> getRightChild() {
-        return rightChild;
+    public BinaryTree<T> getRight() {
+        return right;
     }
 
-    public void setRightChild(BinaryTree<T> rightChild) {
-        this.rightChild = rightChild;
+    public void setRight(BinaryTree<T> right) {
+        this.right = right;
     }
 
     public String printIndentedPreOrder(int indent, StringBuilder builder) {
@@ -64,8 +64,8 @@ public class BinaryTree<T> {
         builder.append(new String(new char[indent]).replace("\0", "  "));
         builder.append(getValue());
         builder.append(System.lineSeparator());
-        doUnlessNull(getLeftChild(), node -> node.getLeftChild().print(indent + 1, builder));
-        doUnlessNull(getRightChild(), node -> node.getRightChild().print(indent + 1, builder));
+        doUnlessNull(getLeft(), node -> node.getLeft().print(indent + 1, builder));
+        doUnlessNull(getRight(), node -> node.getRight().print(indent + 1, builder));
         return builder.toString();
     }
 
@@ -76,14 +76,14 @@ public class BinaryTree<T> {
     }
 
     public void eachInOrder(Consumer<T> consumer) {
-        doUnlessNull(getLeftChild(), node -> node.getLeftChild().eachInOrder(consumer));
+        doUnlessNull(getLeft(), node -> node.getLeft().eachInOrder(consumer));
         doUnlessNull(this, node -> consumer.accept(this.value));
-        doUnlessNull(getRightChild(), node -> node.getRightChild().eachInOrder(consumer));
+        doUnlessNull(getRight(), node -> node.getRight().eachInOrder(consumer));
     }
 
     public void eachPostOrder(Consumer<T> consumer) {
-        doUnlessNull(getLeftChild(), node -> node.getLeftChild().eachPostOrder(consumer));
-        doUnlessNull(getRightChild(), node -> node.getRightChild().eachPostOrder(consumer));
+        doUnlessNull(getLeft(), node -> node.getLeft().eachPostOrder(consumer));
+        doUnlessNull(getRight(), node -> node.getRight().eachPostOrder(consumer));
         doUnlessNull(this, node -> consumer.accept(this.value));
     }
 }
