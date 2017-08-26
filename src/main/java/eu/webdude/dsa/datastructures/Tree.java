@@ -7,10 +7,8 @@ import java.util.stream.Collectors;
 public class Tree<T extends Comparable<T>> implements Comparable<Tree<T>> {
 
     private final T value;
-
-    private Tree<T> parent;
-
     private final List<Tree<T>> children;
+    private Tree<T> parent;
     private Object leafs;
 
     public Tree(T value, Tree<T>... children) {
