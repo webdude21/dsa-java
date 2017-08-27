@@ -66,8 +66,8 @@ public class BinarySearchTreeTests {
 
     @Test
     public void testContainsMethod_shouldReturnTrue() {
-        boolean contains = bst.contains(-10);
-        Assert.assertEquals(false, contains);
+        boolean contains = bst.contains(5);
+        Assert.assertEquals(true, contains);
     }
 
     @Test
