@@ -38,8 +38,8 @@ public class CrackingTheCodingInterviewTest {
     }
 
     @Test
-    public void positiveTestForPalindromeWithWhiteSpace() {
-        assertTrue(CrackingTheCodingInterview.isPalindrome("Tact Coa"));
+    public void positiveTestForPermutationOfAPalindrome() {
+        assertTrue(CrackingTheCodingInterview.isPermutationOfPalindrome("Tact Coa"));
     }
 
     @Test

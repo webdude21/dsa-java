@@ -1,6 +1,10 @@
 package eu.webdude.dsa.algo;
 
 import java.util.Arrays;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class CrackingTheCodingInterview {
     static boolean allUniqueCharacters(String input) {
@@ -38,5 +42,18 @@ public class CrackingTheCodingInterview {
         }
 
         return true;
+    }
+
+    public static boolean isPermutationOfPalindrome(String input) {
+        String processedInput = input.replaceAll("\\s+", "").toLowerCase();
+        Predicate<Long> isEven = val -> val / 2 == 0;
+
+        Map<Integer, Long> occurrenceMap = processedInput.chars()
+                .boxed()
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+
+        long unevenOccurences = occurrenceMap.values().stream().filter(isEven).count();
+
+        return unevenOccurences == 0 || unevenOccurences == 1 && !isEven.test((long) processedInput.length());
     }
 }
