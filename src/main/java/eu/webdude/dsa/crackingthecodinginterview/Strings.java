@@ -97,7 +97,7 @@ public class Strings {
     }
 
     public static String compress(String input) {
-        StringBuilder stringBuilder = new StringBuilder();
+        StringBuilder stringBuilder = new StringBuilder(input.length() + 30);
 
         int currentLetterCount = 1;
         char previousLetter = input.charAt(0);
