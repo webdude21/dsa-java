@@ -95,4 +95,31 @@ public class Strings {
 
         return unevenOccurrences == 0 || unevenOccurrences == 1 && !isEven.test((long) processedInput.length());
     }
+
+    public static String compress(String input) {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        int currentLetterCount = 1;
+        char previousLetter = input.charAt(0);
+
+        for (int i = 1; i < input.length(); i++) {
+            char currentLetter = input.charAt(i);
+
+            if (previousLetter != currentLetter) {
+                stringBuilder.append(previousLetter);
+                stringBuilder.append(currentLetterCount);
+                currentLetterCount = 1;
+                previousLetter = currentLetter;
+            } else {
+                currentLetterCount++;
+            }
+        }
+
+        stringBuilder.append(previousLetter);
+        stringBuilder.append(currentLetterCount);
+
+        String resultString = stringBuilder.toString();
+
+        return resultString.length() >= input.length() ? input : resultString;
+    }
 }

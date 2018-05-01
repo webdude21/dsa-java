@@ -7,8 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class StringsTest {
 
@@ -35,6 +34,12 @@ public class StringsTest {
         assertTrue(Strings.isOneAway("pales", "pale"));
         assertTrue(Strings.isOneAway("pale", "bale"));
         assertFalse(Strings.isOneAway("pale", "bake"));
+    }
+
+    @Test
+    public void stringCompression() {
+        assertEquals("a2b1c5a3", Strings.compress("aabcccccaaa"));
+        assertEquals("a2b1c5a2b1", Strings.compress("aabcccccaab"));
     }
 
     @Test
