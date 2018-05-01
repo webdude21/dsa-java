@@ -40,7 +40,7 @@ public class Strings {
         }
 
         if (a.length() == b.length()) {
-            return canEdit(a, b, 0, maxEdits);
+            return canEdit(a, b, maxEdits);
         }
 
         if (a.length() < b.length()) {
@@ -49,10 +49,12 @@ public class Strings {
 
         return IntStream.range(0, a.length())
                 .mapToObj(i -> a.substring(0, i) + a.substring(i + 1))
-                .anyMatch(edited -> canEdit(edited, b, 1, maxEdits));
+                .anyMatch(edited -> edited.equals(b));
     }
 
-    private static boolean canEdit(String a, String b, int edits, int maxEdits) {
+    private static boolean canEdit(String a, String b, int maxEdits) {
+        int edits = 0;
+
         for (int i = 0; i < a.length(); i++) {
             if (a.charAt(i) != b.charAt(i)) {
                 edits++;
