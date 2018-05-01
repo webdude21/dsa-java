@@ -1,4 +1,4 @@
-package eu.webdude.dsa.algo;
+package eu.webdude.dsa.crackingthecodinginterview;
 
 import org.junit.Test;
 
@@ -10,23 +10,31 @@ import java.util.function.Function;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class CrackingTheCodingInterviewTest {
+public class StringsTest {
 
     private ArrayList<Function<String, Boolean>> allCharsImplementations = new ArrayList<>();
 
-    public CrackingTheCodingInterviewTest() {
-        allCharsImplementations.add(CrackingTheCodingInterview::allUniqueCharacters);
-        allCharsImplementations.add(CrackingTheCodingInterview::allUniqueCharactersWithStream);
+    public StringsTest() {
+        allCharsImplementations.add(Strings::allUniqueCharacters);
+        allCharsImplementations.add(Strings::allUniqueCharactersWithStream);
     }
 
     @Test
     public void positiveTestForPermutation() {
-        assertTrue(CrackingTheCodingInterview.isPermutation("aba", "baa"));
+        assertTrue(Strings.isPermutation("aba", "baa"));
     }
 
     @Test
     public void negativeTestForPermutation() {
-        assertFalse(CrackingTheCodingInterview.isPermutation("cba", "afa"));
+        assertFalse(Strings.isPermutation("cba", "afa"));
+    }
+
+    @Test
+    public void oneAway() {
+        assertTrue(Strings.isOneAway("pale", "ple"));
+        assertTrue(Strings.isOneAway("pales", "pale"));
+        assertTrue(Strings.isOneAway("pale", "bale"));
+        assertFalse(Strings.isOneAway("pale", "bake"));
     }
 
     @Test
@@ -34,17 +42,17 @@ public class CrackingTheCodingInterviewTest {
         List<String> testInputs = Arrays.asList("anna", "Civic", "kayak", "level", "madam", "noon", "racecar",
                 "radar", "redder", "refer", "repaper", "rotator", "rotor", "sagas", "solos", "stats", "tenet", "wow");
 
-        testInputs.forEach(s -> assertTrue(CrackingTheCodingInterview.isPalindrome(s)));
+        testInputs.forEach(s -> assertTrue(Strings.isPalindrome(s)));
     }
 
     @Test
     public void positiveTestForPermutationOfAPalindrome() {
-        assertTrue(CrackingTheCodingInterview.isPermutationOfPalindrome("Tact Coa"));
+        assertTrue(Strings.isPermutationOfPalindrome("Tact Coa"));
     }
 
     @Test
     public void negativeTestForPalindrome() {
-        assertFalse(CrackingTheCodingInterview.isPalindrome("testing"));
+        assertFalse(Strings.isPalindrome("testing"));
     }
 
     @Test
