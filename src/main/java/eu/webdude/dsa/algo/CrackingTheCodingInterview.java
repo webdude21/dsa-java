@@ -1,7 +1,6 @@
 package eu.webdude.dsa.algo;
 
 import java.util.Arrays;
-import java.util.Map;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -33,7 +32,7 @@ public class CrackingTheCodingInterview {
     }
 
     public static boolean isPalindrome(String input) {
-        String processedInput = input.replaceAll("\\s+", "").toLowerCase();
+        String processedInput = input.replaceAll("\\W", "").toLowerCase();
 
         for (int i = 0; i < processedInput.length() / 2; i++) {
             if (processedInput.charAt(i) != processedInput.charAt(processedInput.length() - i - 1)) {
@@ -45,15 +44,18 @@ public class CrackingTheCodingInterview {
     }
 
     public static boolean isPermutationOfPalindrome(String input) {
-        String processedInput = input.replaceAll("\\s+", "").toLowerCase();
+        String processedInput = input.replaceAll("\\W", "").toLowerCase();
         Predicate<Long> isEven = val -> val / 2 == 0;
 
-        Map<Integer, Long> occurrenceMap = processedInput.chars()
+        long unevenOccurrences = processedInput
+                .chars()
                 .boxed()
-                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+                .values()
+                .stream()
+                .filter(isEven)
+                .count();
 
-        long unevenOccurences = occurrenceMap.values().stream().filter(isEven).count();
-
-        return unevenOccurences == 0 || unevenOccurences == 1 && !isEven.test((long) processedInput.length());
+        return unevenOccurrences == 0 || unevenOccurrences == 1 && !isEven.test((long) processedInput.length());
     }
 }
