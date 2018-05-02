@@ -121,4 +121,8 @@ public class StringChallenges {
 
         return stringBuilder.length() >= input.length() ? input : stringBuilder.toString();
     }
+
+    public static boolean isRotation(String a, String b) {
+        return (a + a).contains(b);
+    }
 }

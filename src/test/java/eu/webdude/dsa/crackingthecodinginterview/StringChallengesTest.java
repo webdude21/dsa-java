@@ -19,6 +19,11 @@ public class StringChallengesTest {
     }
 
     @Test
+    public void stringRotation() {
+        assertTrue(StringChallenges.isRotation("waterbottle", "erbottlewat"));
+    }
+
+    @Test
     public void positiveTestForPermutation() {
         assertTrue(StringChallenges.isPermutation("aba", "baa"));
     }
