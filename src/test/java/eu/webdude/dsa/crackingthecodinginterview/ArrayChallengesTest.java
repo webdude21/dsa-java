@@ -7,7 +7,7 @@ import static org.junit.Assert.assertArrayEquals;
 public class ArrayChallengesTest {
 
     @Test
-    public void rotateMatrixOfFour() {
+    public void rotateMatrixOfFive() {
         int[][] input = generateMatrix(5);
         int[][] expected = new int[5][];
 
