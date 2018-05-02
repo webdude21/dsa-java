@@ -6,9 +6,9 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class Strings {
+public class StringChallenges {
     static boolean allUniqueCharacters(String input) {
-        for (int i = 0; i < input.length() - 1; i++) {
+        for (int i = 0; i < input.length(); i++) {
             for (int j = i + 1; j < input.length(); j++) {
                 if (input.charAt(i) == input.charAt(j)) {
                     return false;

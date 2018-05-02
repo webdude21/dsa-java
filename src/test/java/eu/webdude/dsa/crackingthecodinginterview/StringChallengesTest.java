@@ -9,37 +9,37 @@ import java.util.function.Function;
 
 import static org.junit.Assert.*;
 
-public class StringsTest {
+public class StringChallengesTest {
 
     private ArrayList<Function<String, Boolean>> allCharsImplementations = new ArrayList<>();
 
-    public StringsTest() {
-        allCharsImplementations.add(Strings::allUniqueCharacters);
-        allCharsImplementations.add(Strings::allUniqueCharactersWithStream);
+    public StringChallengesTest() {
+        allCharsImplementations.add(StringChallenges::allUniqueCharacters);
+        allCharsImplementations.add(StringChallenges::allUniqueCharactersWithStream);
     }
 
     @Test
     public void positiveTestForPermutation() {
-        assertTrue(Strings.isPermutation("aba", "baa"));
+        assertTrue(StringChallenges.isPermutation("aba", "baa"));
     }
 
     @Test
     public void negativeTestForPermutation() {
-        assertFalse(Strings.isPermutation("cba", "afa"));
+        assertFalse(StringChallenges.isPermutation("cba", "afa"));
     }
 
     @Test
     public void oneAway() {
-        assertTrue(Strings.isOneAway("pale", "ple"));
-        assertTrue(Strings.isOneAway("pales", "pale"));
-        assertTrue(Strings.isOneAway("pale", "bale"));
-        assertFalse(Strings.isOneAway("pale", "bake"));
+        assertTrue(StringChallenges.isOneAway("pale", "ple"));
+        assertTrue(StringChallenges.isOneAway("pales", "pale"));
+        assertTrue(StringChallenges.isOneAway("pale", "bale"));
+        assertFalse(StringChallenges.isOneAway("pale", "bake"));
     }
 
     @Test
     public void stringCompression() {
-        assertEquals("a2b1c5a3", Strings.compress("aabcccccaaa"));
-        assertEquals("a2b1c5a2b1", Strings.compress("aabcccccaab"));
+        assertEquals("a2b1c5a3", StringChallenges.compress("aabcccccaaa"));
+        assertEquals("a2b1c5a2b1", StringChallenges.compress("aabcccccaab"));
     }
 
     @Test
@@ -47,17 +47,17 @@ public class StringsTest {
         List<String> testInputs = Arrays.asList("anna", "Civic", "kayak", "level", "madam", "noon", "racecar",
                 "radar", "redder", "refer", "repaper", "rotator", "rotor", "sagas", "solos", "stats", "tenet", "wow");
 
-        testInputs.forEach(s -> assertTrue(Strings.isPalindrome(s)));
+        testInputs.forEach(s -> assertTrue(StringChallenges.isPalindrome(s)));
     }
 
     @Test
     public void positiveTestForPermutationOfAPalindrome() {
-        assertTrue(Strings.isPermutationOfPalindrome("Tact Coa"));
+        assertTrue(StringChallenges.isPermutationOfPalindrome("Tact Coa"));
     }
 
     @Test
     public void negativeTestForPalindrome() {
-        assertFalse(Strings.isPalindrome("testing"));
+        assertFalse(StringChallenges.isPalindrome("testing"));
     }
 
     @Test
