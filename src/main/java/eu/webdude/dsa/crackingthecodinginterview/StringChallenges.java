@@ -8,8 +8,8 @@ import java.util.stream.IntStream;
 
 public class StringChallenges {
     static boolean allUniqueCharacters(String input) {
-        for (int i = 0; i < input.length(); i++) {
-            for (int j = i + 1; j < input.length(); j++) {
+        for (var i = 0; i < input.length(); i++) {
+            for (var j = i + 1; j < input.length(); j++) {
                 if (input.charAt(i) == input.charAt(j)) {
                     return false;
                 }
@@ -24,8 +24,8 @@ public class StringChallenges {
     }
 
     static boolean isPermutation(String a, String b) {
-        char[] aCharArr = a.toCharArray();
-        char[] bCharArr = b.toCharArray();
+        var aCharArr = a.toCharArray();
+        var bCharArr = b.toCharArray();
         Arrays.sort(aCharArr);
         Arrays.sort(bCharArr);
 
@@ -33,7 +33,7 @@ public class StringChallenges {
     }
 
     public static boolean isOneAway(String a, String b) {
-        int maxEdits = 1;
+        var maxEdits = 1;
 
         if (Math.abs(a.length() - b.length()) > maxEdits) {
             return false;
@@ -53,9 +53,9 @@ public class StringChallenges {
     }
 
     private static boolean canEdit(String a, String b, int maxEdits) {
-        int edits = 0;
+        var edits = 0;
 
-        for (int i = 0; i < a.length(); i++) {
+        for (var i = 0; i < a.length(); i++) {
             if (a.charAt(i) != b.charAt(i)) {
                 edits++;
             }
@@ -69,9 +69,9 @@ public class StringChallenges {
     }
 
     public static boolean isPalindrome(String input) {
-        String processedInput = input.replaceAll("\\W", "").toLowerCase();
+        var processedInput = input.replaceAll("\\W", "").toLowerCase();
 
-        for (int i = 0; i < processedInput.length() / 2; i++) {
+        for (var i = 0; i < processedInput.length() / 2; i++) {
             if (processedInput.charAt(i) != processedInput.charAt(processedInput.length() - i - 1)) {
                 return false;
             }
@@ -81,10 +81,10 @@ public class StringChallenges {
     }
 
     public static boolean isPermutationOfPalindrome(String input) {
-        String processedInput = input.replaceAll("\\W", "").toLowerCase();
+        var processedInput = input.replaceAll("\\W", "").toLowerCase();
         Predicate<Long> isEven = val -> val / 2 == 0;
 
-        long unevenOccurrences = processedInput
+        var unevenOccurrences = processedInput
                 .chars()
                 .boxed()
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
@@ -97,13 +97,13 @@ public class StringChallenges {
     }
 
     public static String compress(String input) {
-        StringBuilder stringBuilder = new StringBuilder(input.length() + 30);
+        var stringBuilder = new StringBuilder(input.length() + 30);
 
-        int currentLetterCount = 1;
-        char previousLetter = input.charAt(0);
+        var currentLetterCount = 1;
+        var previousLetter = input.charAt(0);
 
-        for (int i = 1; i < input.length(); i++) {
-            char currentLetter = input.charAt(i);
+        for (var i = 1; i < input.length(); i++) {
+            var currentLetter = input.charAt(i);
 
             if (previousLetter != currentLetter) {
                 stringBuilder.append(previousLetter);
@@ -118,8 +118,7 @@ public class StringChallenges {
         stringBuilder.append(previousLetter);
         stringBuilder.append(currentLetterCount);
 
-        String resultString = stringBuilder.toString();
 
-        return resultString.length() >= input.length() ? input : resultString;
+        return stringBuilder.length() >= input.length() ? input : stringBuilder.toString();
     }
 }

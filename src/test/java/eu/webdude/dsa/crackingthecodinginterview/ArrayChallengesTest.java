@@ -8,8 +8,8 @@ public class ArrayChallengesTest {
 
     @Test
     public void rotateMatrixOfFive() {
-        int[][] input = generateMatrix(5);
-        int[][] expected = new int[5][];
+        var input = generateMatrix(5);
+        var expected = new int[5][];
 
         expected[0] = new int[]{0, 0, 0, 0, 0};
         expected[1] = new int[]{1, 1, 1, 1, 1};
@@ -22,8 +22,8 @@ public class ArrayChallengesTest {
 
     @Test
     public void rotateMatrixOfThree() {
-        int[][] input = generateMatrix(3);
-        int[][] expected = new int[3][];
+        var input = generateMatrix(3);
+        var expected = new int[3][];
 
         expected[0] = new int[]{0, 0, 0};
         expected[1] = new int[]{1, 1, 1};
@@ -33,12 +33,12 @@ public class ArrayChallengesTest {
     }
 
     private int[][] generateMatrix(int size) {
-        int[][] result = new int[size][];
+        var result = new int[size][];
 
-        for (int i = 0; i < size; i++) {
+        for (var i = 0; i < size; i++) {
             result[i] = new int[size];
 
-            for (int j = 0; j < size; j++) {
+            for (var j = 0; j < size; j++) {
                 result[i][j] = j;
             }
         }
