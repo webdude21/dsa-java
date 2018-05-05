@@ -1,7 +1,8 @@
 package eu.webdude.dsa.datastructures;
 
-import java.util.ArrayList;
+import java.lang.reflect.Array;
 import java.util.Iterator;
+import java.util.Objects;
 
 public class DoublyLinkedList<E> implements Iterable<E> {
 
@@ -68,9 +69,18 @@ public class DoublyLinkedList<E> implements Iterable<E> {
 
     @SuppressWarnings("unchecked")
     public E[] toArray() {
-        ArrayList<E> list = new ArrayList<>();
-        this.forEach(list::add);
-        return (E[]) list.toArray();
+        if (size == 0 || head == null || head.value == null) {
+            return (E[]) new Object[this.size];
+        }
+
+        E[] arr = (E[]) Array.newInstance(head.value.getClass(), this.size);
+        int index = 0;
+
+        for (E item : this) {
+            arr[index++] = item;
+        }
+
+        return arr;
     }
 
     @Override
@@ -90,6 +100,103 @@ public class DoublyLinkedList<E> implements Iterable<E> {
                 return val;
             }
         };
+    }
+
+    public void removeDuplicates() {
+        Node<E> head = this.head;
+        Node<E> skipHead = head.next;
+
+        while (true) {
+            while (skipHead != null) {
+                Node<E> newSkipHead = skipHead.next;
+
+                if (skipHead.value.equals(head.value)) {
+                    if (skipHead.prev != null) {
+                        skipHead.prev.next = newSkipHead;
+                    }
+
+                    if (skipHead.next != null) {
+                        skipHead.next.prev = newSkipHead;
+                    }
+
+                    size--;
+                }
+
+                skipHead = newSkipHead;
+            }
+
+            head = head.next;
+
+            if (head == null || head.next == null) {
+                return;
+            }
+
+            skipHead = head.next;
+        }
+    }
+
+    public E nthToLast(int i) {
+        Node<E> current = tail;
+
+        while (i > 0 && current != null) {
+            current = current.prev;
+            i--;
+        }
+
+        return current != null ? current.value : null;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        // fast fail equals
+        if (this == o) return true;
+        if (!(o instanceof DoublyLinkedList)) return false;
+        DoublyLinkedList<?> that = (DoublyLinkedList<?>) o;
+        if (size != that.size) return false;
+        if (!(Objects.equals(head.value, that.head.value) && Objects.equals(tail.value, that.tail.value))) return false;
+
+        return actualEquals(that);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(head.value, tail.value, size);
+    }
+
+    public void removeMiddleElement() {
+        Node<E> slowPointer = head;
+        Node<E> fastPointer = head;
+
+        while (true) {
+            Node<E> newSlowPointer = slowPointer.next;
+
+            if (fastPointer.next == null) {
+                slowPointer.prev.next = newSlowPointer;
+                slowPointer.next.prev = newSlowPointer;
+                size--;
+                return;
+            }
+
+            slowPointer = newSlowPointer;
+            fastPointer = fastPointer.next.next;
+        }
+
+    }
+
+    public boolean isPalindrome() {
+        Node<E> head = this.head;
+        Node<E> tail = this.tail;
+
+        for (int i = 0; i < size / 2; i++) {
+            if (!head.value.equals(tail.value)) {
+                return false;
+            }
+
+            head = head.next;
+            tail = tail.prev;
+        }
+
+        return true;
     }
 
     private void handleFirstElement(Node<E> el) {
@@ -115,6 +222,18 @@ public class DoublyLinkedList<E> implements Iterable<E> {
         if (this.size() == 0) {
             throw new IllegalArgumentException();
         }
+    }
+
+    private boolean actualEquals(DoublyLinkedList<?> that) {
+        Iterator<E> iterator = this.iterator();
+
+        for (Object objectFromOther : that) {
+            if (!objectFromOther.equals(iterator.next())) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public class Node<T> {
