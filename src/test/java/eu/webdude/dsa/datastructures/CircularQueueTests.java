@@ -7,118 +7,118 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class CircularQueueTests {
 
-    @Test
-    void enqueue_emptyQueue_shouldAddElement() {
-        CircularQueue<Integer> queue = new CircularQueue<>();
+  @Test
+  void enqueue_emptyQueue_shouldAddElement() {
+    CircularQueue<Integer> queue = new CircularQueue<>();
 
-        queue.enqueue(5);
+    queue.enqueue(5);
 
-        int expectedSize = 1;
-        Assertions.assertEquals(expectedSize, queue.size());
+    int expectedSize = 1;
+    Assertions.assertEquals(expectedSize, queue.size());
+  }
+
+  @Test
+  void enqueueDeque_shouldWorkCorrectly() {
+    CircularQueue<String> queue = new CircularQueue<>();
+    String element = "some value";
+
+    queue.enqueue(element);
+    String elementFromQueue = queue.dequeue();
+
+    int expectedSize = 0;
+    Assertions.assertEquals(expectedSize, queue.size());
+    Assertions.assertEquals(element, elementFromQueue);
+  }
+
+  @Test
+  void dequeue_emptyQueue_throwsException() {
+    CircularQueue<Integer> queue = new CircularQueue<>();
+    assertThrows(IllegalArgumentException.class, queue::dequeue);
+  }
+
+  @Test
+  void enqueueDequeue100Elements_shouldWorkCorrectly() {
+    CircularQueue<Integer> queue = new CircularQueue<>();
+    int numberOfElements = 1000;
+
+    for (int i = 0; i < numberOfElements; i++) {
+      queue.enqueue(i);
     }
 
-    @Test
-    void enqueueDeque_shouldWorkCorrectly() {
-        CircularQueue<String> queue = new CircularQueue<>();
-        String element = "some value";
+    for (int i = 0; i < numberOfElements; i++) {
+      int expectedSize = numberOfElements - i;
 
-        queue.enqueue(element);
-        String elementFromQueue = queue.dequeue();
+      Assertions.assertEquals(expectedSize, queue.size());
+      int element = queue.dequeue();
+      Assertions.assertEquals(i, element);
 
-        int expectedSize = 0;
-        Assertions.assertEquals(expectedSize, queue.size());
-        Assertions.assertEquals(element, elementFromQueue);
+      expectedSize = numberOfElements - i - 1;
+      Assertions.assertEquals(expectedSize, queue.size());
+    }
+  }
+
+  @Test
+  void circularQueue_enqueueDequeueManyChunks_shouldWorkCorrectly() {
+    CircularQueue<Integer> queue = new CircularQueue<>();
+    int chunks = 100;
+
+    int value = 1;
+    for (int i = 0; i < chunks; i++) {
+      Assertions.assertEquals(0, queue.size());
+      int chunkSize = i + 1;
+      for (int counter = 0; counter < chunkSize; counter++) {
+        Assertions.assertEquals(value - 1, queue.size());
+        queue.enqueue(value);
+        Assertions.assertEquals(value, queue.size());
+        value++;
+      }
+
+      for (int counter = 0; counter < chunkSize; counter++) {
+        value--;
+        Assertions.assertEquals(value, queue.size());
+        queue.dequeue();
+        Assertions.assertEquals(value - 1, queue.size());
+      }
+
+      Assertions.assertEquals(0, queue.size());
+    }
+  }
+
+  @Test
+  void enqueue500Elements_toArray_shouldWorkCorrectly() {
+    Object[] array = new Object[500];
+    for (int i = 0; i < 500; i++) {
+      array[i] = i;
     }
 
-    @Test
-    void dequeue_emptyQueue_throwsException() {
-        CircularQueue<Integer> queue = new CircularQueue<>();
-        assertThrows(IllegalArgumentException.class, queue::dequeue);
+    CircularQueue<Object> queue = new CircularQueue<>();
+
+    for (Object anArray : array) {
+      queue.enqueue(anArray);
     }
 
-    @Test
-    void enqueueDequeue100Elements_shouldWorkCorrectly() {
-        CircularQueue<Integer> queue = new CircularQueue<>();
-        int numberOfElements = 1000;
+    Object[] arrayFromQueue = queue.toArray();
 
-        for (int i = 0; i < numberOfElements; i++) {
-            queue.enqueue(i);
-        }
+    Assertions.assertArrayEquals(array, arrayFromQueue);
+  }
 
-        for (int i = 0; i < numberOfElements; i++) {
-            int expectedSize = numberOfElements - i;
+  @Test
+  void initialCapacity1_enqueueDequeue20Elements_shouldWorkCorrectly() {
+    int elementsCount = 20;
+    int initialCapacity = 1;
 
-            Assertions.assertEquals(expectedSize, queue.size());
-            int element = queue.dequeue();
-            Assertions.assertEquals(i, element);
-
-            expectedSize = numberOfElements - i - 1;
-            Assertions.assertEquals(expectedSize, queue.size());
-        }
+    CircularQueue<Integer> queue = new CircularQueue<>(initialCapacity);
+    for (int i = 0; i < elementsCount; i++) {
+      queue.enqueue(i);
     }
 
-    @Test
-    void circularQueue_enqueueDequeueManyChunks_shouldWorkCorrectly() {
-        CircularQueue<Integer> queue = new CircularQueue<>();
-        int chunks = 100;
-
-        int value = 1;
-        for (int i = 0; i < chunks; i++) {
-            Assertions.assertEquals(0, queue.size());
-            int chunkSize = i + 1;
-            for (int counter = 0; counter < chunkSize; counter++) {
-                Assertions.assertEquals(value - 1, queue.size());
-                queue.enqueue(value);
-                Assertions.assertEquals(value, queue.size());
-                value++;
-            }
-
-            for (int counter = 0; counter < chunkSize; counter++) {
-                value--;
-                Assertions.assertEquals(value, queue.size());
-                queue.dequeue();
-                Assertions.assertEquals(value - 1, queue.size());
-            }
-
-            Assertions.assertEquals(0, queue.size());
-        }
+    Assertions.assertEquals(elementsCount, queue.size());
+    for (int i = 0; i < elementsCount; i++) {
+      int elementFromQueue = queue.dequeue();
+      Assertions.assertEquals(i, elementFromQueue);
     }
 
-    @Test
-    void enqueue500Elements_toArray_shouldWorkCorrectly() {
-        Object[] array = new Object[500];
-        for (int i = 0; i < 500; i++) {
-            array[i] = i;
-        }
-
-        CircularQueue<Object> queue = new CircularQueue<>();
-
-        for (Object anArray : array) {
-            queue.enqueue(anArray);
-        }
-
-        Object[] arrayFromQueue = queue.toArray();
-
-        Assertions.assertArrayEquals(array, arrayFromQueue);
-    }
-
-    @Test
-    void initialCapacity1_enqueueDequeue20Elements_shouldWorkCorrectly() {
-        int elementsCount = 20;
-        int initialCapacity = 1;
-
-        CircularQueue<Integer> queue = new CircularQueue<>(initialCapacity);
-        for (int i = 0; i < elementsCount; i++) {
-            queue.enqueue(i);
-        }
-
-        Assertions.assertEquals(elementsCount, queue.size());
-        for (int i = 0; i < elementsCount; i++) {
-            int elementFromQueue = queue.dequeue();
-            Assertions.assertEquals(i, elementFromQueue);
-        }
-
-        Assertions.assertEquals(0, queue.size());
-    }
+    Assertions.assertEquals(0, queue.size());
+  }
 
 }

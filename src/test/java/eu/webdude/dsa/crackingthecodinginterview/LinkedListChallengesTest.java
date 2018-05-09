@@ -9,117 +9,117 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LinkedListChallengesTest {
 
-    @Test
-    void removeDuplicates() {
-        DoublyLinkedList<Integer> testInput = getTestInput();
-        DoublyLinkedList<Integer> expectedOutput = getExpectedOutputWithoutDuplicates();
+  @Test
+  void removeDuplicates() {
+    DoublyLinkedList<Integer> testInput = getTestInput();
+    DoublyLinkedList<Integer> expectedOutput = getExpectedOutputWithoutDuplicates();
 
-        testInput.removeDuplicates();
+    testInput.removeDuplicates();
 
-        assertEquals(testInput, expectedOutput);
-        assertArrayEquals(testInput.toArray(), expectedOutput.toArray());
-    }
+    assertEquals(testInput, expectedOutput);
+    assertArrayEquals(testInput.toArray(), expectedOutput.toArray());
+  }
 
-    @Test
-    void isPalindrome() {
-        DoublyLinkedList<Integer> oddPalindrome = getTestInputForOddPalindrome();
-        DoublyLinkedList<Integer> evenPalindrome = getTestInputForEvenPalindrome();
-        DoublyLinkedList<Integer> nonPalindrome = getTestInput();
+  @Test
+  void isPalindrome() {
+    DoublyLinkedList<Integer> oddPalindrome = getTestInputForOddPalindrome();
+    DoublyLinkedList<Integer> evenPalindrome = getTestInputForEvenPalindrome();
+    DoublyLinkedList<Integer> nonPalindrome = getTestInput();
 
-        Assertions.assertTrue(evenPalindrome.isPalindrome());
-        Assertions.assertTrue(oddPalindrome.isPalindrome());
-        Assertions.assertFalse(nonPalindrome.isPalindrome());
-    }
+    Assertions.assertTrue(evenPalindrome.isPalindrome());
+    Assertions.assertTrue(oddPalindrome.isPalindrome());
+    Assertions.assertFalse(nonPalindrome.isPalindrome());
+  }
 
-    @Test
-    void deleteMiddleNode() {
-        DoublyLinkedList<Integer> testInput = getTestInput();
-        DoublyLinkedList<Integer> expectedOutput = getExpectedOutputWithTheMiddleElementRemoved();
+  @Test
+  void deleteMiddleNode() {
+    DoublyLinkedList<Integer> testInput = getTestInput();
+    DoublyLinkedList<Integer> expectedOutput = getExpectedOutputWithTheMiddleElementRemoved();
 
-        testInput.removeMiddleElement();
+    testInput.removeMiddleElement();
 
-        Assertions.assertEquals(testInput, expectedOutput);
-        Assertions.assertArrayEquals(testInput.toArray(), expectedOutput.toArray());
-    }
+    Assertions.assertEquals(testInput, expectedOutput);
+    Assertions.assertArrayEquals(testInput.toArray(), expectedOutput.toArray());
+  }
 
-    @Test
-    void findKthToLast() {
-        DoublyLinkedList<Integer> testInput = getTestInput();
+  @Test
+  void findKthToLast() {
+    DoublyLinkedList<Integer> testInput = getTestInput();
 
-        Assertions.assertEquals(testInput.nthToLast(3), Integer.valueOf(3));
-        Assertions.assertEquals(testInput.nthToLast(4), Integer.valueOf(4));
-        Assertions.assertEquals(testInput.nthToLast(8), Integer.valueOf(1));
-    }
+    Assertions.assertEquals(testInput.nthToLast(3), Integer.valueOf(3));
+    Assertions.assertEquals(testInput.nthToLast(4), Integer.valueOf(4));
+    Assertions.assertEquals(testInput.nthToLast(8), Integer.valueOf(1));
+  }
 
-    private DoublyLinkedList<Integer> getTestInputForEvenPalindrome() {
-        DoublyLinkedList<Integer> input = new DoublyLinkedList<>();
+  private DoublyLinkedList<Integer> getTestInputForEvenPalindrome() {
+    DoublyLinkedList<Integer> input = new DoublyLinkedList<>();
 
-        input.addLast(1);
-        input.addLast(2);
-        input.addLast(3);
-        input.addLast(3);
-        input.addLast(2);
-        input.addLast(1);
+    input.addLast(1);
+    input.addLast(2);
+    input.addLast(3);
+    input.addLast(3);
+    input.addLast(2);
+    input.addLast(1);
 
-        return input;
-    }
+    return input;
+  }
 
-    private DoublyLinkedList<Integer> getTestInputForOddPalindrome() {
-        DoublyLinkedList<Integer> input = new DoublyLinkedList<>();
+  private DoublyLinkedList<Integer> getTestInputForOddPalindrome() {
+    DoublyLinkedList<Integer> input = new DoublyLinkedList<>();
 
-        input.addLast(1);
-        input.addLast(2);
-        input.addLast(3);
-        input.addLast(4);
-        input.addLast(3);
-        input.addLast(2);
-        input.addLast(1);
+    input.addLast(1);
+    input.addLast(2);
+    input.addLast(3);
+    input.addLast(4);
+    input.addLast(3);
+    input.addLast(2);
+    input.addLast(1);
 
-        return input;
-    }
+    return input;
+  }
 
-    private DoublyLinkedList<Integer> getExpectedOutputWithTheMiddleElementRemoved() {
-        DoublyLinkedList<Integer> input = new DoublyLinkedList<>();
+  private DoublyLinkedList<Integer> getExpectedOutputWithTheMiddleElementRemoved() {
+    DoublyLinkedList<Integer> input = new DoublyLinkedList<>();
 
-        input.addLast(1);
-        input.addLast(2);
-        input.addLast(3);
-        input.addLast(1);
-        input.addLast(3);
-        input.addLast(5);
-        input.addLast(6);
-        input.addLast(7);
+    input.addLast(1);
+    input.addLast(2);
+    input.addLast(3);
+    input.addLast(1);
+    input.addLast(3);
+    input.addLast(5);
+    input.addLast(6);
+    input.addLast(7);
 
-        return input;
-    }
+    return input;
+  }
 
-    private DoublyLinkedList<Integer> getExpectedOutputWithoutDuplicates() {
-        DoublyLinkedList<Integer> input = new DoublyLinkedList<>();
+  private DoublyLinkedList<Integer> getExpectedOutputWithoutDuplicates() {
+    DoublyLinkedList<Integer> input = new DoublyLinkedList<>();
 
-        input.addLast(1);
-        input.addLast(2);
-        input.addLast(3);
-        input.addLast(4);
-        input.addLast(5);
-        input.addLast(6);
-        input.addLast(7);
+    input.addLast(1);
+    input.addLast(2);
+    input.addLast(3);
+    input.addLast(4);
+    input.addLast(5);
+    input.addLast(6);
+    input.addLast(7);
 
-        return input;
-    }
+    return input;
+  }
 
-    private DoublyLinkedList<Integer> getTestInput() {
-        DoublyLinkedList<Integer> input = new DoublyLinkedList<>();
+  private DoublyLinkedList<Integer> getTestInput() {
+    DoublyLinkedList<Integer> input = new DoublyLinkedList<>();
 
-        input.addLast(1);
-        input.addLast(2);
-        input.addLast(3);
-        input.addLast(1);
-        input.addLast(4);
-        input.addLast(3);
-        input.addLast(5);
-        input.addLast(6);
-        input.addLast(7);
+    input.addLast(1);
+    input.addLast(2);
+    input.addLast(3);
+    input.addLast(1);
+    input.addLast(4);
+    input.addLast(3);
+    input.addLast(5);
+    input.addLast(6);
+    input.addLast(7);
 
-        return input;
-    }
+    return input;
+  }
 }

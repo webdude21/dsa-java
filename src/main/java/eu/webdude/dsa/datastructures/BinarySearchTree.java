@@ -3,130 +3,130 @@ package eu.webdude.dsa.datastructures;
 import java.util.function.Consumer;
 
 public class BinarySearchTree<T extends Comparable<T>> {
-    private Node root;
+  private Node root;
 
-    public Node getRoot() {
-        return this.root;
+  public Node getRoot() {
+    return this.root;
+  }
+
+  void setRoot(Node root) {
+    this.root = root;
+  }
+
+  public void insert(T value) {
+    Node node = new Node(value);
+    Node currentNode = root;
+    Node previousNode = root;
+
+    if (root == null) {
+      root = new Node(value);
+      return;
     }
 
-    void setRoot(Node root) {
-        this.root = root;
+    while (currentNode != null) {
+      int compareResult = currentNode.getValue().compareTo(value);
+      previousNode = currentNode;
+      currentNode = getNextNode(currentNode, value);
     }
 
-    public void insert(T value) {
-        Node node = new Node(value);
-        Node currentNode = root;
-        Node previousNode = root;
+    if (previousNode.getValue().compareTo(value) > 0) {
+      previousNode.setLeft(node);
+    } else {
+      previousNode.setRight(node);
+    }
+  }
 
-        if (root == null) {
-            root = new Node(value);
-            return;
-        }
+  public boolean contains(T value) {
+    return this.search(value).getRoot() != null;
+  }
 
-        while (currentNode != null) {
-            int compareResult = currentNode.getValue().compareTo(value);
-            previousNode = currentNode;
-            currentNode = getNextNode(currentNode, value);
-        }
+  public BinarySearchTree<T> search(T item) {
+    BinarySearchTree<T> result;
+    Node currentNode = root;
 
-        if (previousNode.getValue().compareTo(value) > 0) {
-            previousNode.setLeft(node);
-        } else {
-            previousNode.setRight(node);
-        }
+    if (currentNode == null || item == null) {
+      return null;
     }
 
-    public boolean contains(T value) {
-        return this.search(value).getRoot() != null;
+    while (currentNode != null) {
+      if (currentNode.getValue().equals(item)) {
+        break;
+      }
+
+      currentNode = getNextNode(currentNode, item);
     }
 
-    private BinarySearchTree<T> getBST(Node node) {
-        BinarySearchTree<T> bst = new BinarySearchTree<>();
-        bst.setRoot(node);
-        return bst;
+    return getBST(currentNode);
+  }
+
+  public Iterable<T> range(T from, T to) {
+    throw new UnsupportedOperationException();
+  }
+
+  private BinarySearchTree<T> getBST(Node node) {
+    BinarySearchTree<T> bst = new BinarySearchTree<>();
+    bst.setRoot(node);
+    return bst;
+  }
+
+  private Node getNextNode(Node node, T value) {
+    int compareResult = node.getValue().compareTo(value);
+
+    if (compareResult > 0) {
+      node = node.getLeft();
+    } else if (compareResult < 0) {
+      node = node.getRight();
     }
 
-    public BinarySearchTree<T> search(T item) {
-        BinarySearchTree<T> result;
-        Node currentNode = root;
+    return node;
+  }
 
-        if (currentNode == null || item == null) {
-            return null;
-        }
+  private void doUnlessNull(Node node, Consumer<Node> consumer) {
+    if (node != null) {
+      consumer.accept(this.root);
+    }
+  }
 
-        while (currentNode != null) {
-            if (currentNode.getValue().equals(item)) {
-                break;
-            }
+  private void eachInOrder(Consumer<T> consumer) {
+    doUnlessNull(root.getLeft(), node -> eachInOrder(consumer));
+    doUnlessNull(root, node -> consumer.accept(node.getValue()));
+    doUnlessNull(root.getRight(), node -> eachInOrder(consumer));
+  }
 
-            currentNode = getNextNode(currentNode, item);
-        }
+  class Node {
+    private T value;
 
-        return getBST(currentNode);
+    private Node left;
+
+    private Node right;
+
+    Node(T value) {
+      this.value = value;
     }
 
-    private Node getNextNode(Node node, T value) {
-        int compareResult = node.getValue().compareTo(value);
-
-        if (compareResult > 0) {
-            node = node.getLeft();
-        } else if (compareResult < 0) {
-            node = node.getRight();
-        }
-
-        return node;
+    public T getValue() {
+      return this.value;
     }
 
-    private void doUnlessNull(Node node, Consumer<Node> consumer) {
-        if (node != null) {
-            consumer.accept(this.root);
-        }
+    public void setValue(T value) {
+      this.value = value;
     }
 
-    private void eachInOrder(Consumer<T> consumer) {
-        doUnlessNull(root.getLeft(), node -> eachInOrder(consumer));
-        doUnlessNull(root, node -> consumer.accept(node.getValue()));
-        doUnlessNull(root.getRight(), node -> eachInOrder(consumer));
+    public Node getLeft() {
+      return this.left;
     }
 
-    public Iterable<T> range(T from, T to) {
-        throw new UnsupportedOperationException();
+    void setLeft(Node left) {
+      this.left = left;
     }
 
-    class Node {
-        private T value;
-
-        private Node left;
-
-        private Node right;
-
-        Node(T value) {
-            this.value = value;
-        }
-
-        public T getValue() {
-            return this.value;
-        }
-
-        public void setValue(T value) {
-            this.value = value;
-        }
-
-        public Node getLeft() {
-            return this.left;
-        }
-
-        void setLeft(Node left) {
-            this.left = left;
-        }
-
-        public Node getRight() {
-            return this.right;
-        }
-
-        void setRight(Node right) {
-            this.right = right;
-        }
+    public Node getRight() {
+      return this.right;
     }
+
+    void setRight(Node right) {
+      this.right = right;
+    }
+  }
 }
 

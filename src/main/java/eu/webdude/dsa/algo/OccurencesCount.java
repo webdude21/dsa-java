@@ -7,18 +7,18 @@ import java.util.stream.Collectors;
 
 class OccurencesCount {
 
-	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
-		String[] input = scanner.nextLine().split("\\s+");
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    String[] input = scanner.nextLine().split("\\s+");
 
-		String result = Arrays.stream(input)
-				.map(Long::parseLong)
-				.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
-				.entrySet()
-				.stream()
-				.map(x -> String.format("%d -> %d times", x.getKey(), x.getValue()))
-				.collect(Collectors.joining(System.lineSeparator()));
+    String result = Arrays.stream(input)
+      .map(Long::parseLong)
+      .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+      .entrySet()
+      .stream()
+      .map(x -> String.format("%d -> %d times", x.getKey(), x.getValue()))
+      .collect(Collectors.joining(System.lineSeparator()));
 
-		System.out.print(result);
-	}
+    System.out.print(result);
+  }
 }
