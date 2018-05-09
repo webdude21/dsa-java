@@ -1,132 +1,131 @@
 package eu.webdude.dsa.datastructures;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
-public class LinkedListTests {
+class LinkedListTests {
 
-	@Test
-	public void addFirstShouldIncreaseCount() {
-		LinkedList<Integer> list = new LinkedList<>();
+    @Test
+    void addFirstShouldIncreaseCount() {
+        LinkedList<Integer> list = new LinkedList<>();
 
-		list.addFirst(1);
+        list.addFirst(1);
 
-		Assert.assertEquals(1, list.size());
-	}
+        Assertions.assertEquals(1, list.size());
+    }
 
-	@Test
-	public void addLastShouldIncreaseCount() {
-		LinkedList<Integer> list = new LinkedList<>();
+    @Test
+    void addLastShouldIncreaseCount() {
+        LinkedList<Integer> list = new LinkedList<>();
 
-		list.addLast(1);
+        list.addLast(1);
 
-		Assert.assertEquals(1, list.size());
-	}
+        Assertions.assertEquals(1, list.size());
+    }
 
-	@Test
-	public void addFirstShouldAddElement() {
-		LinkedList<Integer> list = new LinkedList<>();
+    @Test
+    void addFirstShouldAddElement() {
+        LinkedList<Integer> list = new LinkedList<>();
 
-		list.addFirst(1);
+        list.addFirst(1);
 
-		for (Integer item : list) {
-			Assert.assertEquals(Integer.valueOf(1), item);
-		}
-	}
+        for (Integer item : list) {
+            Assertions.assertEquals(Integer.valueOf(1), item);
+        }
+    }
 
-	@Test
-	public void AddLastShouldAddElement() {
-		LinkedList<Integer> list = new LinkedList<>();
+    @Test
+    void AddLastShouldAddElement() {
+        LinkedList<Integer> list = new LinkedList<>();
 
-		list.addLast(1);
+        list.addLast(1);
 
-		for (Integer item : list) {
-			Assert.assertEquals(Integer.valueOf(1), item);
-		}
-	}
+        for (Integer item : list) {
+            Assertions.assertEquals(Integer.valueOf(1), item);
+        }
+    }
 
-	@Test
-	public void addFirstMultipleElementsShouldAddElement() {
-		LinkedList<Integer> list = new LinkedList<>();
+    @Test
+    void addFirstMultipleElementsShouldAddElement() {
+        LinkedList<Integer> list = new LinkedList<>();
 
-		for (int i = 0; i < 100; i++) {
-			list.addFirst(i);
-		}
+        for (int i = 0; i < 100; i++) {
+            list.addFirst(i);
+        }
 
-		int expected = 0;
-		for (Integer item : list) {
-			expected++;
-		}
-		Assert.assertEquals(expected, list.size());
-	}
+        int expected = 0;
+        for (Integer item : list) {
+            expected++;
+        }
+        Assertions.assertEquals(expected, list.size());
+    }
 
-	@Test
-	public void addLastMultipleElementsShouldAddElement() {
-		LinkedList<Integer> list = new LinkedList<>();
+    @Test
+    void addLastMultipleElementsShouldAddElement() {
+        LinkedList<Integer> list = new LinkedList<>();
 
-		for (int i = 0; i < 100; i++) {
-			list.addLast(i);
-		}
+        for (int i = 0; i < 100; i++) {
+            list.addLast(i);
+        }
 
-		int expected = 0;
+        int expected = 0;
 
-		for (Integer item : list) {
-			expected++;
-		}
+        for (Integer item : list) {
+            expected++;
+        }
 
-		Assert.assertEquals(expected, list.size());
-	}
+        Assertions.assertEquals(expected, list.size());
+    }
 
-	@Test
-	public void removeFirstSingleElementShouldDecreaseCount() {
-		LinkedList<Integer> list = new LinkedList<>();
+    @Test
+    void removeFirstSingleElementShouldDecreaseCount() {
+        LinkedList<Integer> list = new LinkedList<>();
 
-		list.addFirst(1);
-		list.addFirst(2);
-		list.removeFirst();
+        list.addFirst(1);
+        list.addFirst(2);
+        list.removeFirst();
 
-		Assert.assertEquals(1, list.size());
-	}
+        Assertions.assertEquals(1, list.size());
+    }
 
-	@Test
-	public void RemoveLastSingleElementShouldDecreaseCount() {
-		LinkedList<Integer> list = new LinkedList<>();
+    @Test
+    void RemoveLastSingleElementShouldDecreaseCount() {
+        LinkedList<Integer> list = new LinkedList<>();
 
-		list.addFirst(1);
-		list.addFirst(2);
-		list.removeLast();
+        list.addFirst(1);
+        list.addFirst(2);
+        list.removeLast();
 
-		Assert.assertEquals(1, list.size());
-	}
+        Assertions.assertEquals(1, list.size());
+    }
 
-	@Test
-	public void RemoveFirstMultipleElementsShouldRemove() {
-		LinkedList<Integer> list = new LinkedList<>();
+    @Test
+    void RemoveFirstMultipleElementsShouldRemove() {
+        LinkedList<Integer> list = new LinkedList<>();
 
-		for (int i = 0; i < 100; i++) {
-			list.addLast(i);
-		}
+        for (int i = 0; i < 100; i++) {
+            list.addLast(i);
+        }
 
-		for (Integer i = 0; i < 100; i++) {
-			Assert.assertEquals(i, list.removeFirst());
-		}
+        for (Integer i = 0; i < 100; i++) {
+            Assertions.assertEquals(i, list.removeFirst());
+        }
 
-		Assert.assertEquals(0, list.size());
-	}
+        Assertions.assertEquals(0, list.size());
+    }
 
-	@Test
-	public void RemoveLastMultipleElementsShouldRemove() {
-		LinkedList<Integer> list = new LinkedList<>();
+    @Test
+    void RemoveLastMultipleElementsShouldRemove() {
+        LinkedList<Integer> list = new LinkedList<>();
 
-		for (int i = 0; i < 100; i++) {
-			list.addFirst(i);
-		}
+        for (int i = 0; i < 100; i++) {
+            list.addFirst(i);
+        }
 
-		for (Integer i = 0; i < 100; i++) {
-			Assert.assertEquals(i, list.removeLast());
-		}
+        for (Integer i = 0; i < 100; i++) {
+            Assertions.assertEquals(i, list.removeLast());
+        }
 
-		Assert.assertEquals(0, list.size());
-	}
-
+        Assertions.assertEquals(0, list.size());
+    }
 }

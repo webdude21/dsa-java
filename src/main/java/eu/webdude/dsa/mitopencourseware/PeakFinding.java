@@ -1,10 +1,9 @@
 package eu.webdude.dsa.mitopencourseware;
 
-public class PeakFinding {
+class PeakFinding {
 
-    public static void main(String[] args) {
-        int[] input = {1, 16, 3, 15, 5, 8, 7, 10, 9, 2};
-        System.out.println(findAPeak(input, input.length / 2));
+    public static int findAPeak(int[] input) {
+        return findAPeak(input, input.length / 2);
     }
 
     private static int findAPeak(int[] input, int peakCandidateIndex) {

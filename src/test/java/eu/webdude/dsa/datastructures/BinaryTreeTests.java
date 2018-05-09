@@ -1,15 +1,15 @@
 package eu.webdude.dsa.datastructures;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class BinaryTreeTests {
+class BinaryTreeTests {
 
     @Test
-    public void buildBinaryTree_forEachTraversal_inOrder_shouldWorkCorrectly() {
+    void buildBinaryTree_forEachTraversal_inOrder_shouldWorkCorrectly() {
         // Arrange
         BinaryTree<String> binaryTree =
                 new BinaryTree<>("*",
@@ -29,12 +29,12 @@ public class BinaryTreeTests {
         }
 
         // Assert
-        String[] expectedNodes = new String[] { "3", "+", "2", "*", "9", "-", "6" };
-        Assert.assertArrayEquals(expectedNodes, actualResult);
+        String[] expectedNodes = new String[]{"3", "+", "2", "*", "9", "-", "6"};
+        Assertions.assertArrayEquals(expectedNodes, actualResult);
     }
 
     @Test
-    public void buildBinaryTree_forEachTraversal_postOrder_shouldWorkCorrectly() {
+    void buildBinaryTree_forEachTraversal_postOrder_shouldWorkCorrectly() {
         // Arrange
         BinaryTree<String> binaryTree =
                 new BinaryTree<>("*",
@@ -54,12 +54,12 @@ public class BinaryTreeTests {
         }
 
         // Assert
-        String[] expectedNodes = new String[] { "3", "2", "+", "9", "6", "-", "*" };
-        Assert.assertArrayEquals(expectedNodes, actualResult);
+        String[] expectedNodes = new String[]{"3", "2", "+", "9", "6", "-", "*"};
+        Assertions.assertArrayEquals(expectedNodes, actualResult);
     }
 
     @Test
-    public void buildBinaryTree_printIndentedPreOrder_shouldWorkCorrectly() {
+    void buildBinaryTree_printIndentedPreOrder_shouldWorkCorrectly() {
         // Arrange
         BinaryTree<String> binaryTree =
                 new BinaryTree<>("*",
@@ -77,6 +77,6 @@ public class BinaryTreeTests {
 
         // Assert
         String expectedOutput = "*\n  -\n    +\n      3\n      2\n    *\n      9\n      6\n  8\n";
-        Assert.assertEquals(expectedOutput, output);
+        Assertions.assertEquals(expectedOutput, output);
     }
 }

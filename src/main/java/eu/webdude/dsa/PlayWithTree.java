@@ -5,7 +5,7 @@ import eu.webdude.dsa.datastructures.Tree;
 
 import java.util.stream.Collectors;
 
-public class PlayWithTree {
+class PlayWithTree {
 
     public static void main(String[] args) {
         Tree<Integer> tree =

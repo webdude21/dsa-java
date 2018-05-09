@@ -243,29 +243,29 @@ public class DoublyLinkedList<E> implements Iterable<E> {
 
         private Node<T> prev;
 
-        public Node(T value, Node<T> next, Node<T> previous) {
+        Node(T value, Node<T> next, Node<T> previous) {
             this.value = value;
             this.next = next;
             this.prev = previous;
         }
 
-        public Node<T> getPrev() {
+        Node<T> getPrev() {
             return prev;
         }
 
-        public void setPrev(Node<T> prev) {
+        void setPrev(Node<T> prev) {
             this.prev = prev;
         }
 
-        public Node<T> getNext() {
+        Node<T> getNext() {
             return next;
         }
 
-        public void setNext(Node<T> next) {
+        void setNext(Node<T> next) {
             this.next = next;
         }
 
-        public T getValue() {
+        T getValue() {
             return value;
         }
     }

@@ -2,7 +2,7 @@ package eu.webdude.dsa.crackingthecodinginterview;
 
 import java.util.ArrayList;
 
-public class ArrayChallenges {
+class ArrayChallenges {
 
     public static int[][] rotateMatrix(int[][] matrix) {
         for (var i = 0; i < matrix.length / 2; i++) {

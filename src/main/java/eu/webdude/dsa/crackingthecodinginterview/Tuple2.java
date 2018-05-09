@@ -1,6 +1,6 @@
 package eu.webdude.dsa.crackingthecodinginterview;
 
-public class Tuple2<T, K> {
+class Tuple2<T, K> {
 
     public final T first;
 

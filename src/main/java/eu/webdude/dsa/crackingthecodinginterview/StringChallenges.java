@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class StringChallenges {
+class StringChallenges {
     static boolean allUniqueCharacters(String input) {
         for (var i = 0; i < input.length(); i++) {
             for (var j = i + 1; j < input.length(); j++) {

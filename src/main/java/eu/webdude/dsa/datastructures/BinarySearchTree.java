@@ -9,7 +9,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
         return this.root;
     }
 
-    public void setRoot(Node root) {
+    void setRoot(Node root) {
         this.root = root;
     }
 
@@ -40,7 +40,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
         return this.search(value).getRoot() != null;
     }
 
-    public BinarySearchTree<T> getBST(Node node) {
+    private BinarySearchTree<T> getBST(Node node) {
         BinarySearchTree<T> bst = new BinarySearchTree<>();
         bst.setRoot(node);
         return bst;
@@ -83,7 +83,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
         }
     }
 
-    public void eachInOrder(Consumer<T> consumer) {
+    private void eachInOrder(Consumer<T> consumer) {
         doUnlessNull(root.getLeft(), node -> eachInOrder(consumer));
         doUnlessNull(root, node -> consumer.accept(node.getValue()));
         doUnlessNull(root.getRight(), node -> eachInOrder(consumer));
@@ -100,7 +100,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
 
         private Node right;
 
-        public Node(T value) {
+        Node(T value) {
             this.value = value;
         }
 
@@ -116,7 +116,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
             return this.left;
         }
 
-        public void setLeft(Node left) {
+        void setLeft(Node left) {
             this.left = left;
         }
 
@@ -124,7 +124,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
             return this.right;
         }
 
-        public void setRight(Node right) {
+        void setRight(Node right) {
             this.right = right;
         }
     }

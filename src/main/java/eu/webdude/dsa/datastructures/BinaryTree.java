@@ -24,8 +24,8 @@ public class BinaryTree<T> {
         this.right = right;
     }
 
-    public T getValue() {
-        return value;
+    BinaryTree<T> getLeft() {
+        return left;
     }
 
     public void setValue(T value) {
@@ -40,16 +40,16 @@ public class BinaryTree<T> {
         this.parent = parent;
     }
 
-    public BinaryTree<T> getLeft() {
-        return left;
+    BinaryTree<T> getRight() {
+        return right;
     }
 
     public void setLeft(BinaryTree<T> left) {
         this.left = left;
     }
 
-    public BinaryTree<T> getRight() {
-        return right;
+    private T getValue() {
+        return value;
     }
 
     public void setRight(BinaryTree<T> right) {

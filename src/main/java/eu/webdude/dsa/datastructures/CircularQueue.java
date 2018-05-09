@@ -1,6 +1,6 @@
 package eu.webdude.dsa.datastructures;
 
-public class CircularQueue<E> {
+class CircularQueue<E> {
 
     private static int DEFAULT_CAPACITY = 8;
 

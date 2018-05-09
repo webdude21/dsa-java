@@ -1,15 +1,15 @@
 package eu.webdude.dsa.datastructures;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TreeTests {
+class TreeTests {
 
     @Test
-    public void buildTree_forEachTraversal_shouldWorkCorrectly() {
+    void buildTree_forEachTraversal_shouldWorkCorrectly() {
         // Arrange
         Tree<Integer> tree =
                 new Tree<>(7,
@@ -30,12 +30,12 @@ public class TreeTests {
         }
 
         // Assert
-        int[] expectedNodes = new int[] { 7, 19, 1, 12, 31, 21, 14, 23, 6 };
-        Assert.assertArrayEquals(expectedNodes, result);
+        int[] expectedNodes = new int[]{7, 19, 1, 12, 31, 21, 14, 23, 6};
+        Assertions.assertArrayEquals(expectedNodes, result);
     }
 
     @Test
-    public void buildTree_printTree_shouldWorkCorrectly() {
+    void buildTree_printTree_shouldWorkCorrectly() {
         // Arrange
         Tree<Integer> tree =
                 new Tree<>(7,
@@ -53,11 +53,11 @@ public class TreeTests {
 
         // Assert
         String expectedOutput = "7\n  19\n    1\n    12\n    31\n  21\n  14\n    23\n    6\n";
-        Assert.assertEquals(expectedOutput, output);
+        Assertions.assertEquals(expectedOutput, output);
     }
 
     @Test
-    public void orderDFS_singleElement_shouldWordCorrectly() {
+    void orderDFS_singleElement_shouldWordCorrectly() {
         // Arrange
         Tree<Integer> tree = new Tree<>(7);
 
@@ -71,12 +71,12 @@ public class TreeTests {
         }
 
         // Assert
-        int[] expectedOutput = new int[] { 7 };
-        Assert.assertArrayEquals(expectedOutput, actualResult);
+        int[] expectedOutput = new int[]{7};
+        Assertions.assertArrayEquals(expectedOutput, actualResult);
     }
 
     @Test
-    public void orderDFS_multipleElements_shouldWordCorrectly() {
+    void orderDFS_multipleElements_shouldWordCorrectly() {
         // Arrange
         Tree<Integer> tree =
                 new Tree<>(7,
@@ -99,12 +99,12 @@ public class TreeTests {
         }
 
         // Assert
-        int[] expectedOutput = new int[] { 1, 12, 31, 19, 21, 23, 6, 14, 7 };
-        Assert.assertArrayEquals(expectedOutput, actualResult);
+        int[] expectedOutput = new int[]{1, 12, 31, 19, 21, 23, 6, 14, 7};
+        Assertions.assertArrayEquals(expectedOutput, actualResult);
     }
 
     @Test
-    public void orderBFS_singleElement_shouldWorkCorrectly() {
+    void orderBFS_singleElement_shouldWorkCorrectly() {
         // Arrange
         Tree<Integer> tree =
                 new Tree<>(7);
@@ -119,12 +119,12 @@ public class TreeTests {
         }
 
         // Assert
-        int[] expectedOutput = new int[] { 7 };
-        Assert.assertArrayEquals(expectedOutput, actualResult);
+        int[] expectedOutput = new int[]{7};
+        Assertions.assertArrayEquals(expectedOutput, actualResult);
     }
 
     @Test
-    public void orderBFS_multipleElements_shouldWorkCorrectly() {
+    void orderBFS_multipleElements_shouldWorkCorrectly() {
         // Arrange
         Tree<Integer> tree =
                 new Tree<>(7,
@@ -147,7 +147,7 @@ public class TreeTests {
         }
 
         // Assert
-        int[] expectedOutput = new int[] { 7, 19, 21, 14, 1, 12, 31, 23, 6 };
-        Assert.assertArrayEquals(expectedOutput, actualResult);
+        int[] expectedOutput = new int[]{7, 19, 21, 14, 1, 12, 31, 23, 6};
+        Assertions.assertArrayEquals(expectedOutput, actualResult);
     }
 }

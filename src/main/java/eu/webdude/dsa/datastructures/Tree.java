@@ -17,8 +17,8 @@ public class Tree<T extends Comparable<T>> implements Comparable<Tree<T>> {
         this.children.forEach(x -> x.setParent(this));
     }
 
-    public boolean hasDescendants() {
-        return getChildren().size() != 0;
+    List<Tree<T>> getChildren() {
+        return children;
     }
 
     public Tree<T> getRoot() {
@@ -67,8 +67,8 @@ public class Tree<T extends Comparable<T>> implements Comparable<Tree<T>> {
         return result;
     }
 
-    public List<Tree<T>> getChildren() {
-        return children;
+    private boolean hasDescendants() {
+        return getChildren().size() != 0;
     }
 
     public T getValue() {
@@ -80,11 +80,11 @@ public class Tree<T extends Comparable<T>> implements Comparable<Tree<T>> {
         return this.getValue().compareTo(o.getValue());
     }
 
-    public Tree<T> getParent() {
+    private Tree<T> getParent() {
         return parent;
     }
 
-    public void setParent(Tree<T> parent) {
+    void setParent(Tree<T> parent) {
         this.parent = parent;
     }
 

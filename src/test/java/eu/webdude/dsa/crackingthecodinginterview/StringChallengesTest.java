@@ -1,40 +1,41 @@
 package eu.webdude.dsa.crackingthecodinginterview;
 
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class StringChallengesTest {
+class StringChallengesTest {
 
     private ArrayList<Function<String, Boolean>> allCharsImplementations = new ArrayList<>();
 
-    public StringChallengesTest() {
+    StringChallengesTest() {
         allCharsImplementations.add(StringChallenges::allUniqueCharacters);
         allCharsImplementations.add(StringChallenges::allUniqueCharactersWithStream);
     }
 
     @Test
-    public void stringRotation() {
+    void stringRotation() {
         assertTrue(StringChallenges.isRotation("waterbottle", "erbottlewat"));
     }
 
     @Test
-    public void positiveTestForPermutation() {
+    void positiveTestForPermutation() {
         assertTrue(StringChallenges.isPermutation("aba", "baa"));
     }
 
     @Test
-    public void negativeTestForPermutation() {
+    void negativeTestForPermutation() {
         assertFalse(StringChallenges.isPermutation("cba", "afa"));
     }
 
     @Test
-    public void oneAway() {
+    void oneAway() {
         assertTrue(StringChallenges.isOneAway("pale", "ple"));
         assertTrue(StringChallenges.isOneAway("pales", "pale"));
         assertTrue(StringChallenges.isOneAway("pale", "bale"));
@@ -42,13 +43,13 @@ public class StringChallengesTest {
     }
 
     @Test
-    public void stringCompression() {
+    void stringCompression() {
         assertEquals("a2b1c5a3", StringChallenges.compress("aabcccccaaa"));
         assertEquals("a2b1c5a2b1", StringChallenges.compress("aabcccccaab"));
     }
 
     @Test
-    public void positiveTestForPalindrome() {
+    void positiveTestForPalindrome() {
         List<String> testInputs = Arrays.asList("anna", "Civic", "kayak", "level", "madam", "noon", "racecar",
                 "radar", "redder", "refer", "repaper", "rotator", "rotor", "sagas", "solos", "stats", "tenet", "wow");
 
@@ -56,23 +57,23 @@ public class StringChallengesTest {
     }
 
     @Test
-    public void positiveTestForPermutationOfAPalindrome() {
+    void positiveTestForPermutationOfAPalindrome() {
         assertTrue(StringChallenges.isPermutationOfPalindrome("Tact Coa"));
     }
 
     @Test
-    public void negativeTestForPalindrome() {
+    void negativeTestForPalindrome() {
         assertFalse(StringChallenges.isPalindrome("testing"));
     }
 
     @Test
-    public void positiveTestWithAllUniqueCharacters() {
+    void positiveTestWithAllUniqueCharacters() {
         List<String> testInputs = Arrays.asList("abcd", "abcdABCDФГфг", "abcdABCDФГфг");
         allCharsImplementations.forEach(allChars -> testInputs.forEach(input -> assertTrue(allChars.apply(input))));
     }
 
     @Test
-    public void negativeTestWithAllRepeatingCharacters() {
+    void negativeTestWithAllRepeatingCharacters() {
         List<String> testInputs = Arrays.asList("abcda", "abcdABCDФГфгa");
         allCharsImplementations.forEach(allChars -> testInputs.forEach(input -> assertFalse(allChars.apply(input))));
     }

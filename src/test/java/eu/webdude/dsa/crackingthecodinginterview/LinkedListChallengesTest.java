@@ -1,51 +1,54 @@
 package eu.webdude.dsa.crackingthecodinginterview;
 
 import eu.webdude.dsa.datastructures.DoublyLinkedList;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
-public class LinkedListChallengesTest {
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+class LinkedListChallengesTest {
 
     @Test
-    public void removeDuplicates() {
+    void removeDuplicates() {
         DoublyLinkedList<Integer> testInput = getTestInput();
         DoublyLinkedList<Integer> expectedOutput = getExpectedOutputWithoutDuplicates();
 
         testInput.removeDuplicates();
 
-        Assert.assertEquals(testInput, expectedOutput);
-        Assert.assertArrayEquals(testInput.toArray(), expectedOutput.toArray());
+        assertEquals(testInput, expectedOutput);
+        assertArrayEquals(testInput.toArray(), expectedOutput.toArray());
     }
 
     @Test
-    public void isPalindrome() {
+    void isPalindrome() {
         DoublyLinkedList<Integer> oddPalindrome = getTestInputForOddPalindrome();
         DoublyLinkedList<Integer> evenPalindrome = getTestInputForEvenPalindrome();
         DoublyLinkedList<Integer> nonPalindrome = getTestInput();
 
-        Assert.assertTrue(evenPalindrome.isPalindrome());
-        Assert.assertTrue(oddPalindrome.isPalindrome());
-        Assert.assertFalse(nonPalindrome.isPalindrome());
+        Assertions.assertTrue(evenPalindrome.isPalindrome());
+        Assertions.assertTrue(oddPalindrome.isPalindrome());
+        Assertions.assertFalse(nonPalindrome.isPalindrome());
     }
 
     @Test
-    public void deleteMiddleNode() {
+    void deleteMiddleNode() {
         DoublyLinkedList<Integer> testInput = getTestInput();
         DoublyLinkedList<Integer> expectedOutput = getExpectedOutputWithTheMiddleElementRemoved();
 
         testInput.removeMiddleElement();
 
-        Assert.assertEquals(testInput, expectedOutput);
-        Assert.assertArrayEquals(testInput.toArray(), expectedOutput.toArray());
+        Assertions.assertEquals(testInput, expectedOutput);
+        Assertions.assertArrayEquals(testInput.toArray(), expectedOutput.toArray());
     }
 
     @Test
-    public void findKthToLast() {
+    void findKthToLast() {
         DoublyLinkedList<Integer> testInput = getTestInput();
 
-        Assert.assertEquals(testInput.nthToLast(3), Integer.valueOf(3));
-        Assert.assertEquals(testInput.nthToLast(4), Integer.valueOf(4));
-        Assert.assertEquals(testInput.nthToLast(8), Integer.valueOf(1));
+        Assertions.assertEquals(testInput.nthToLast(3), Integer.valueOf(3));
+        Assertions.assertEquals(testInput.nthToLast(4), Integer.valueOf(4));
+        Assertions.assertEquals(testInput.nthToLast(8), Integer.valueOf(1));
     }
 
     private DoublyLinkedList<Integer> getTestInputForEvenPalindrome() {

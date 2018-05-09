@@ -1,13 +1,13 @@
 package eu.webdude.dsa.crackingthecodinginterview;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
-public class ArrayChallengesTest {
+class ArrayChallengesTest {
 
     @Test
-    public void rotateMatrixOfFive() {
+    void rotateMatrixOfFive() {
         var input = generateMatrix(5);
         var expected = new int[5][];
 
@@ -21,7 +21,7 @@ public class ArrayChallengesTest {
     }
 
     @Test
-    public void zeroMatrixTest() {
+    void zeroMatrixTest() {
         var input = new int[5][];
 
         input[0] = new int[]{1, 2, 4, 9, 7};
@@ -42,7 +42,7 @@ public class ArrayChallengesTest {
     }
 
     @Test
-    public void rotateMatrixOfThree() {
+    void rotateMatrixOfThree() {
         var input = generateMatrix(3);
         var expected = new int[3][];
 
