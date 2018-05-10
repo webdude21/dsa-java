@@ -39,7 +39,7 @@ class CircularQueue<E> {
 
   public E dequeue() {
     ensureQueueIsNotEmpty();
-    E result = store[headPointer];
+    var result = store[headPointer];
     size--;
     headPointer = incrementPointer(headPointer, store);
     return result;
@@ -47,11 +47,11 @@ class CircularQueue<E> {
 
   @SuppressWarnings("unchecked")
   public E[] toArray() {
-    E[] resultArray = (E[]) new Object[size];
+    var resultArray = (E[]) new Object[size];
 
-    int currentIndex = headPointer;
+    var currentIndex = headPointer;
 
-    for (int i = 0; i < size; i++) {
+    for (var i = 0; i < size; i++) {
       resultArray[i] = store[currentIndex];
       currentIndex = incrementPointer(currentIndex, store);
     }
@@ -82,12 +82,12 @@ class CircularQueue<E> {
 
     capacity *= 2;
 
-    E[] oldStore = store;
-    int currentIndex = headPointer;
+    var oldStore = store;
+    var currentIndex = headPointer;
 
     initStore();
 
-    for (E item : oldStore) {
+    for (var item : oldStore) {
       enqueue(oldStore[currentIndex]);
       currentIndex = incrementPointer(currentIndex, oldStore);
     }

@@ -18,7 +18,7 @@ public class Tree<T extends Comparable<T>> implements Comparable<Tree<T>> {
   }
 
   public Tree<T> getRoot() {
-    Tree<T> rootCandidate = getParent();
+    var rootCandidate = getParent();
     return rootCandidate == null ? this : rootCandidate.getRoot();
   }
 
@@ -41,7 +41,7 @@ public class Tree<T extends Comparable<T>> implements Comparable<Tree<T>> {
     stack.push(this);
 
     while (stack.size() > 0) {
-      Tree<T> currentOne = stack.pop();
+      var currentOne = stack.pop();
       result.addFirst(currentOne.getValue());
       currentOne.getChildren().forEach(stack::push);
     }
@@ -55,7 +55,7 @@ public class Tree<T extends Comparable<T>> implements Comparable<Tree<T>> {
     queue.add(this);
 
     while (queue.size() > 0) {
-      Tree<T> currentOne = queue.remove();
+      var currentOne = queue.remove();
       result.add(currentOne.getValue());
       queue.addAll(currentOne.getChildren());
     }

@@ -39,18 +39,18 @@ class ArrayChallenges {
   }
 
   private static void zeroLines(int[][] input, Tuple2<Integer, Integer> coordinates) {
-    for (int i = 0; i < input.length; i++) {
+    for (var i = 0; i < input.length; i++) {
       input[coordinates.first][i] = 0;
       input[i][coordinates.second] = 0;
     }
   }
 
   public static void printMatrix(int[][] matrix) {
-    StringBuilder sb = new StringBuilder();
+    var sb = new StringBuilder();
 
-    for (int[] aMatrix : matrix) {
+    for (var aMatrix : matrix) {
       sb.append(System.lineSeparator());
-      for (int j = 0; j < matrix.length; j++) {
+      for (var j = 0; j < matrix.length; j++) {
         sb.append("[").append(aMatrix[j]).append("]");
       }
     }

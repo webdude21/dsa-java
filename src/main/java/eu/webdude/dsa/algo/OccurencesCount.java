@@ -8,10 +8,10 @@ import java.util.stream.Collectors;
 class OccurencesCount {
 
   public static void main(String[] args) {
-    Scanner scanner = new Scanner(System.in);
-    String[] input = scanner.nextLine().split("\\s+");
+    var scanner = new Scanner(System.in);
+    var input = scanner.nextLine().split("\\s+");
 
-    String result = Arrays.stream(input)
+    var result = Arrays.stream(input)
       .map(Long::parseLong)
       .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
       .entrySet()

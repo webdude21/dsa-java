@@ -29,7 +29,7 @@ class LinkedListTests {
 
     list.addFirst(1);
 
-    for (Integer item : list) {
+    for (var item : list) {
       Assertions.assertEquals(Integer.valueOf(1), item);
     }
   }
@@ -40,7 +40,7 @@ class LinkedListTests {
 
     list.addLast(1);
 
-    for (Integer item : list) {
+    for (var item : list) {
       Assertions.assertEquals(Integer.valueOf(1), item);
     }
   }
@@ -49,12 +49,12 @@ class LinkedListTests {
   void addFirstMultipleElementsShouldAddElement() {
     LinkedList<Integer> list = new LinkedList<>();
 
-    for (int i = 0; i < 100; i++) {
+    for (var i = 0; i < 100; i++) {
       list.addFirst(i);
     }
 
-    int expected = 0;
-    for (Integer item : list) {
+    var expected = 0;
+    for (var item : list) {
       expected++;
     }
     Assertions.assertEquals(expected, list.size());
@@ -64,13 +64,13 @@ class LinkedListTests {
   void addLastMultipleElementsShouldAddElement() {
     LinkedList<Integer> list = new LinkedList<>();
 
-    for (int i = 0; i < 100; i++) {
+    for (var i = 0; i < 100; i++) {
       list.addLast(i);
     }
 
-    int expected = 0;
+    var expected = 0;
 
-    for (Integer item : list) {
+    for (var item : list) {
       expected++;
     }
 
@@ -103,7 +103,7 @@ class LinkedListTests {
   void RemoveFirstMultipleElementsShouldRemove() {
     LinkedList<Integer> list = new LinkedList<>();
 
-    for (int i = 0; i < 100; i++) {
+    for (var i = 0; i < 100; i++) {
       list.addLast(i);
     }
 
@@ -118,7 +118,7 @@ class LinkedListTests {
   void RemoveLastMultipleElementsShouldRemove() {
     LinkedList<Integer> list = new LinkedList<>();
 
-    for (int i = 0; i < 100; i++) {
+    for (var i = 0; i < 100; i++) {
       list.addFirst(i);
     }
 

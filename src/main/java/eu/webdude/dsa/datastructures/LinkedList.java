@@ -13,7 +13,7 @@ public class LinkedList<E> implements Iterable<E> {
   }
 
   public void addFirst(E item) {
-    Node<E> oldHead = head;
+    var oldHead = head;
     head = new Node<>(item, oldHead);
     size++;
   }
@@ -24,14 +24,14 @@ public class LinkedList<E> implements Iterable<E> {
       return;
     }
 
-    Node<E> oldTail = this.getTail();
+    var oldTail = this.getTail();
     oldTail.setNext(new Node<>(item, null));
     size++;
   }
 
   public E removeFirst() {
     validateRemoveOperation();
-    E removedValue = head.getValue();
+    var removedValue = head.getValue();
     head = head.getNext();
     size--;
     return removedValue;
@@ -42,8 +42,8 @@ public class LinkedList<E> implements Iterable<E> {
       return removeFirst();
     }
     validateRemoveOperation();
-    Node<E> elementBeforeLast = getAtPos(size() - 2);
-    E removedValue = elementBeforeLast.getNext().getValue();
+    var elementBeforeLast = getAtPos(size() - 2);
+    var removedValue = elementBeforeLast.getNext().getValue();
     elementBeforeLast.setNext(null);
     size--;
     return removedValue;
@@ -62,7 +62,7 @@ public class LinkedList<E> implements Iterable<E> {
 
       @Override
       public E next() {
-        E value = currentEl.getValue();
+        var value = currentEl.getValue();
         currentEl = currentEl.getNext();
         return value;
       }
@@ -74,9 +74,9 @@ public class LinkedList<E> implements Iterable<E> {
   }
 
   private Node<E> getAtPos(int pos) {
-    Node<E> currentNode = head;
+    var currentNode = head;
 
-    for (int i = 0; i < pos; i++) {
+    for (var i = 0; i < pos; i++) {
       if (currentNode == null) {
         throw new IndexOutOfBoundsException();
       }

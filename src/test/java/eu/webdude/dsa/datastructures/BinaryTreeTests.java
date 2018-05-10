@@ -11,7 +11,7 @@ class BinaryTreeTests {
   @Test
   void buildBinaryTree_forEachTraversal_inOrder_shouldWorkCorrectly() {
     // Arrange
-    BinaryTree<String> binaryTree =
+    var binaryTree =
       new BinaryTree<>("*",
         new BinaryTree<>("+",
           new BinaryTree<>("3"),
@@ -23,20 +23,20 @@ class BinaryTreeTests {
     // Act
     List<String> nodes = new ArrayList<>();
     binaryTree.eachInOrder(nodes::add);
-    String[] actualResult = new String[nodes.size()];
-    for (int i = 0; i < nodes.size(); i++) {
+    var actualResult = new String[nodes.size()];
+    for (var i = 0; i < nodes.size(); i++) {
       actualResult[i] = nodes.get(i);
     }
 
     // Assert
-    String[] expectedNodes = new String[]{"3", "+", "2", "*", "9", "-", "6"};
+    var expectedNodes = new String[]{"3", "+", "2", "*", "9", "-", "6"};
     Assertions.assertArrayEquals(expectedNodes, actualResult);
   }
 
   @Test
   void buildBinaryTree_forEachTraversal_postOrder_shouldWorkCorrectly() {
     // Arrange
-    BinaryTree<String> binaryTree =
+    var binaryTree =
       new BinaryTree<>("*",
         new BinaryTree<>("+",
           new BinaryTree<>("3"),
@@ -48,20 +48,20 @@ class BinaryTreeTests {
     // Act
     List<String> nodes = new ArrayList<>();
     binaryTree.eachPostOrder(nodes::add);
-    String[] actualResult = new String[nodes.size()];
-    for (int i = 0; i < nodes.size(); i++) {
+    var actualResult = new String[nodes.size()];
+    for (var i = 0; i < nodes.size(); i++) {
       actualResult[i] = nodes.get(i);
     }
 
     // Assert
-    String[] expectedNodes = new String[]{"3", "2", "+", "9", "6", "-", "*"};
+    var expectedNodes = new String[]{"3", "2", "+", "9", "6", "-", "*"};
     Assertions.assertArrayEquals(expectedNodes, actualResult);
   }
 
   @Test
   void buildBinaryTree_printIndentedPreOrder_shouldWorkCorrectly() {
     // Arrange
-    BinaryTree<String> binaryTree =
+    var binaryTree =
       new BinaryTree<>("*",
         new BinaryTree<>("-",
           new BinaryTree<>("+",
@@ -73,10 +73,10 @@ class BinaryTreeTests {
         new BinaryTree<>("8"));
 
     // Act
-    String output = binaryTree.printIndentedPreOrder(0, new StringBuilder());
+    var output = binaryTree.printIndentedPreOrder(0, new StringBuilder());
 
     // Assert
-    String expectedOutput = "*\n  -\n    +\n      3\n      2\n    *\n      9\n      6\n  8\n";
+    var expectedOutput = "*\n  -\n    +\n      3\n      2\n    *\n      9\n      6\n  8\n";
     Assertions.assertEquals(expectedOutput, output);
   }
 }

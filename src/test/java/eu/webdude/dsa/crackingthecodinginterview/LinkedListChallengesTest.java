@@ -11,8 +11,8 @@ class LinkedListChallengesTest {
 
   @Test
   void removeDuplicates() {
-    DoublyLinkedList<Integer> testInput = getTestInput();
-    DoublyLinkedList<Integer> expectedOutput = getExpectedOutputWithoutDuplicates();
+    var testInput = getTestInput();
+    var expectedOutput = getExpectedOutputWithoutDuplicates();
 
     testInput.removeDuplicates();
 
@@ -22,9 +22,9 @@ class LinkedListChallengesTest {
 
   @Test
   void isPalindrome() {
-    DoublyLinkedList<Integer> oddPalindrome = getTestInputForOddPalindrome();
-    DoublyLinkedList<Integer> evenPalindrome = getTestInputForEvenPalindrome();
-    DoublyLinkedList<Integer> nonPalindrome = getTestInput();
+    var oddPalindrome = getTestInputForOddPalindrome();
+    var evenPalindrome = getTestInputForEvenPalindrome();
+    var nonPalindrome = getTestInput();
 
     Assertions.assertTrue(evenPalindrome.isPalindrome());
     Assertions.assertTrue(oddPalindrome.isPalindrome());
@@ -33,8 +33,8 @@ class LinkedListChallengesTest {
 
   @Test
   void deleteMiddleNode() {
-    DoublyLinkedList<Integer> testInput = getTestInput();
-    DoublyLinkedList<Integer> expectedOutput = getExpectedOutputWithTheMiddleElementRemoved();
+    var testInput = getTestInput();
+    var expectedOutput = getExpectedOutputWithTheMiddleElementRemoved();
 
     testInput.removeMiddleElement();
 
@@ -44,7 +44,7 @@ class LinkedListChallengesTest {
 
   @Test
   void findKthToLast() {
-    DoublyLinkedList<Integer> testInput = getTestInput();
+    var testInput = getTestInput();
 
     Assertions.assertEquals(testInput.nthToLast(3), Integer.valueOf(3));
     Assertions.assertEquals(testInput.nthToLast(4), Integer.valueOf(4));

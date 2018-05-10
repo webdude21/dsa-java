@@ -14,9 +14,9 @@ public class BinarySearchTree<T extends Comparable<T>> {
   }
 
   public void insert(T value) {
-    Node node = new Node(value);
-    Node currentNode = root;
-    Node previousNode = root;
+    var node = new Node(value);
+    var currentNode = root;
+    var previousNode = root;
 
     if (root == null) {
       root = new Node(value);
@@ -24,7 +24,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
     }
 
     while (currentNode != null) {
-      int compareResult = currentNode.getValue().compareTo(value);
+      var compareResult = currentNode.getValue().compareTo(value);
       previousNode = currentNode;
       currentNode = getNextNode(currentNode, value);
     }
@@ -42,7 +42,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
 
   public BinarySearchTree<T> search(T item) {
     BinarySearchTree<T> result;
-    Node currentNode = root;
+    var currentNode = root;
 
     if (currentNode == null || item == null) {
       return null;
@@ -70,7 +70,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
   }
 
   private Node getNextNode(Node node, T value) {
-    int compareResult = node.getValue().compareTo(value);
+    var compareResult = node.getValue().compareTo(value);
 
     if (compareResult > 0) {
       node = node.getLeft();

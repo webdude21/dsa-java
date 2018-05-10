@@ -11,7 +11,7 @@ class TreeTests {
   @Test
   void buildTree_forEachTraversal_shouldWorkCorrectly() {
     // Arrange
-    Tree<Integer> tree =
+    var tree =
       new Tree<>(7,
         new Tree<>(19,
           new Tree<>(1),
@@ -24,20 +24,20 @@ class TreeTests {
     // Act
     List<Integer> nodes = new ArrayList<>();
     tree.each(nodes::add);
-    int[] result = new int[nodes.size()];
-    for (int i = 0; i < nodes.size(); i++) {
+    var result = new int[nodes.size()];
+    for (var i = 0; i < nodes.size(); i++) {
       result[i] = nodes.get(i);
     }
 
     // Assert
-    int[] expectedNodes = new int[]{7, 19, 1, 12, 31, 21, 14, 23, 6};
+    var expectedNodes = new int[]{7, 19, 1, 12, 31, 21, 14, 23, 6};
     Assertions.assertArrayEquals(expectedNodes, result);
   }
 
   @Test
   void buildTree_printTree_shouldWorkCorrectly() {
     // Arrange
-    Tree<Integer> tree =
+    var tree =
       new Tree<>(7,
         new Tree<>(19,
           new Tree<>(1),
@@ -49,36 +49,36 @@ class TreeTests {
           new Tree<>(6)));
 
     // Act
-    String output = tree.print(0, new StringBuilder());
+    var output = tree.print(0, new StringBuilder());
 
     // Assert
-    String expectedOutput = "7\n  19\n    1\n    12\n    31\n  21\n  14\n    23\n    6\n";
+    var expectedOutput = "7\n  19\n    1\n    12\n    31\n  21\n  14\n    23\n    6\n";
     Assertions.assertEquals(expectedOutput, output);
   }
 
   @Test
   void orderDFS_singleElement_shouldWordCorrectly() {
     // Arrange
-    Tree<Integer> tree = new Tree<>(7);
+    var tree = new Tree<>(7);
 
     // Act
     List<Integer> resultElements = new ArrayList<>();
-    Iterable<Integer> elements = tree.orderDFS();
+    var elements = tree.orderDFS();
     elements.forEach(resultElements::add);
-    int[] actualResult = new int[resultElements.size()];
-    for (int i = 0; i < resultElements.size(); i++) {
+    var actualResult = new int[resultElements.size()];
+    for (var i = 0; i < resultElements.size(); i++) {
       actualResult[i] = resultElements.get(i);
     }
 
     // Assert
-    int[] expectedOutput = new int[]{7};
+    var expectedOutput = new int[]{7};
     Assertions.assertArrayEquals(expectedOutput, actualResult);
   }
 
   @Test
   void orderDFS_multipleElements_shouldWordCorrectly() {
     // Arrange
-    Tree<Integer> tree =
+    var tree =
       new Tree<>(7,
         new Tree<>(19,
           new Tree<>(1),
@@ -91,42 +91,42 @@ class TreeTests {
 
     // Act
     List<Integer> resultElements = new ArrayList<>();
-    Iterable<Integer> elements = tree.orderDFS();
+    var elements = tree.orderDFS();
     elements.forEach(resultElements::add);
-    int[] actualResult = new int[resultElements.size()];
-    for (int i = 0; i < resultElements.size(); i++) {
+    var actualResult = new int[resultElements.size()];
+    for (var i = 0; i < resultElements.size(); i++) {
       actualResult[i] = resultElements.get(i);
     }
 
     // Assert
-    int[] expectedOutput = new int[]{1, 12, 31, 19, 21, 23, 6, 14, 7};
+    var expectedOutput = new int[]{1, 12, 31, 19, 21, 23, 6, 14, 7};
     Assertions.assertArrayEquals(expectedOutput, actualResult);
   }
 
   @Test
   void orderBFS_singleElement_shouldWorkCorrectly() {
     // Arrange
-    Tree<Integer> tree =
+    var tree =
       new Tree<>(7);
 
     // Act
     List<Integer> resultElements = new ArrayList<>();
-    Iterable<Integer> elements = tree.orderBFS();
+    var elements = tree.orderBFS();
     elements.forEach(resultElements::add);
-    int[] actualResult = new int[resultElements.size()];
-    for (int i = 0; i < resultElements.size(); i++) {
+    var actualResult = new int[resultElements.size()];
+    for (var i = 0; i < resultElements.size(); i++) {
       actualResult[i] = resultElements.get(i);
     }
 
     // Assert
-    int[] expectedOutput = new int[]{7};
+    var expectedOutput = new int[]{7};
     Assertions.assertArrayEquals(expectedOutput, actualResult);
   }
 
   @Test
   void orderBFS_multipleElements_shouldWorkCorrectly() {
     // Arrange
-    Tree<Integer> tree =
+    var tree =
       new Tree<>(7,
         new Tree<>(19,
           new Tree<>(1),
@@ -139,15 +139,15 @@ class TreeTests {
 
     // Act
     List<Integer> resultElements = new ArrayList<>();
-    Iterable<Integer> elements = tree.orderBFS();
+    var elements = tree.orderBFS();
     elements.forEach(resultElements::add);
-    int[] actualResult = new int[resultElements.size()];
-    for (int i = 0; i < resultElements.size(); i++) {
+    var actualResult = new int[resultElements.size()];
+    for (var i = 0; i < resultElements.size(); i++) {
       actualResult[i] = resultElements.get(i);
     }
 
     // Assert
-    int[] expectedOutput = new int[]{7, 19, 21, 14, 1, 12, 31, 23, 6};
+    var expectedOutput = new int[]{7, 19, 21, 14, 1, 12, 31, 23, 6};
     Assertions.assertArrayEquals(expectedOutput, actualResult);
   }
 }

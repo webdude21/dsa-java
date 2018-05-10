@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 class PlayWithTree {
 
   public static void main(String[] args) {
-    Tree<Integer> tree =
+    var tree =
       new Tree<>(7,
         new Tree<>(19,
           new Tree<>(1),
@@ -20,7 +20,7 @@ class PlayWithTree {
           new Tree<>(6)));
 
     System.out.println("Tree (indented):");
-    String output = tree.print(0, new StringBuilder());
+    var output = tree.print(0, new StringBuilder());
     System.out.println(output);
 
     System.out.printf("Root Node is: %s%n", tree.getRoot().getValue());
@@ -35,7 +35,7 @@ class PlayWithTree {
     System.out.println();
 
     System.out.println();
-    BinaryTree<String> binaryTree =
+    var binaryTree =
       new BinaryTree<>("*",
         new BinaryTree<>("+",
           new BinaryTree<>("3"),

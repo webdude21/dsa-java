@@ -17,7 +17,7 @@ public class DoublyLinkedList<E> implements Iterable<E> {
     }
 
     public void addFirst(E val) {
-        Node<E> oldHead = head;
+      var oldHead = head;
         head = new Node<>(val, oldHead, null);
         handleFirstElement(head);
         if (oldHead != null) {
@@ -28,7 +28,7 @@ public class DoublyLinkedList<E> implements Iterable<E> {
     }
 
     public void addLast(E val) {
-        Node<E> oldTail = tail;
+      var oldTail = tail;
         tail = new Node<>(val, null, oldTail);
         handleFirstElement(tail);
         if (oldTail != null) {
@@ -40,7 +40,7 @@ public class DoublyLinkedList<E> implements Iterable<E> {
 
     public E removeFirst() {
         validateRemoveOperation();
-        E result = head.value;
+      var result = head.value;
         head = head.getNext();
 
         if (head != null) {
@@ -55,7 +55,7 @@ public class DoublyLinkedList<E> implements Iterable<E> {
 
     public E removeLast() {
         validateRemoveOperation();
-        E result = tail.value;
+      var result = tail.value;
         tail = tail.getPrev();
 
         if (tail != null) {
@@ -73,10 +73,10 @@ public class DoublyLinkedList<E> implements Iterable<E> {
             return (E[]) new Object[this.size];
         }
 
-        E[] arr = (E[]) Array.newInstance(head.value.getClass(), this.size);
-        int index = 0;
+      var arr = (E[]) Array.newInstance(head.value.getClass(), this.size);
+      var index = 0;
 
-        for (E item : this) {
+      for (var item : this) {
             arr[index++] = item;
         }
 
@@ -95,7 +95,7 @@ public class DoublyLinkedList<E> implements Iterable<E> {
 
             @Override
             public E next() {
-                E val = current.getValue();
+              var val = current.getValue();
                 current = current.getNext();
                 return val;
             }
@@ -103,12 +103,12 @@ public class DoublyLinkedList<E> implements Iterable<E> {
     }
 
     public void removeDuplicates() {
-        Node<E> head = this.head;
-        Node<E> skipHead = head.next;
+      var head = this.head;
+      var skipHead = head.next;
 
         while (true) {
             while (skipHead != null) {
-                Node<E> newSkipHead = skipHead.next;
+              var newSkipHead = skipHead.next;
 
                 if (skipHead.value.equals(head.value)) {
                     if (skipHead.prev != null) {
@@ -136,7 +136,7 @@ public class DoublyLinkedList<E> implements Iterable<E> {
     }
 
     public E nthToLast(int i) {
-        Node<E> current = tail;
+      var current = tail;
 
         while (i > 0 && current != null) {
             current = current.prev;
@@ -151,7 +151,7 @@ public class DoublyLinkedList<E> implements Iterable<E> {
         // fast fail equals
         if (this == o) return true;
         if (!(o instanceof DoublyLinkedList)) return false;
-        DoublyLinkedList<?> that = (DoublyLinkedList<?>) o;
+      var that = (DoublyLinkedList<?>) o;
         if (size != that.size) return false;
         if (!(Objects.equals(head.value, that.head.value) && Objects.equals(tail.value, that.tail.value))) return false;
 
@@ -164,11 +164,11 @@ public class DoublyLinkedList<E> implements Iterable<E> {
     }
 
     public void removeMiddleElement() {
-        Node<E> slowPointer = head;
-        Node<E> fastPointer = head;
+      var slowPointer = head;
+      var fastPointer = head;
 
         while (true) {
-            Node<E> newSlowPointer = slowPointer.next;
+          var newSlowPointer = slowPointer.next;
 
             if (fastPointer.next == null) {
                 slowPointer.prev.next = newSlowPointer;
@@ -184,10 +184,10 @@ public class DoublyLinkedList<E> implements Iterable<E> {
     }
 
     public boolean isPalindrome() {
-        Node<E> head = this.head;
-        Node<E> tail = this.tail;
+      var head = this.head;
+      var tail = this.tail;
 
-        for (int i = 0; i < size / 2; i++) {
+      for (var i = 0; i < size / 2; i++) {
             if (!head.value.equals(tail.value)) {
                 return false;
             }
@@ -225,7 +225,7 @@ public class DoublyLinkedList<E> implements Iterable<E> {
     }
 
     private boolean actualEquals(DoublyLinkedList<?> that) {
-        Iterator<E> iterator = this.iterator();
+      var iterator = this.iterator();
 
         for (Object objectFromOther : that) {
             if (!objectFromOther.equals(iterator.next())) {

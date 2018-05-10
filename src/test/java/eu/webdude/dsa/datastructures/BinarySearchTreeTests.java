@@ -13,16 +13,16 @@ class BinarySearchTreeTests {
 
   @Test
   void createBinaryTree_testStructure_leftSubTree() {
-    BinarySearchTree<Integer>.Node root = bst.getRoot();
+    var root = bst.getRoot();
 
     Assertions.assertEquals(Integer.valueOf(12), root.getValue());
 
-    BinarySearchTree<Integer>.Node left = root.getLeft();
+    var left = root.getLeft();
 
     Assertions.assertEquals(Integer.valueOf(5), left.getValue());
 
-    BinarySearchTree<Integer>.Node left_left = left.getLeft();
-    BinarySearchTree<Integer>.Node left_right = left.getRight();
+    var left_left = left.getLeft();
+    var left_right = left.getRight();
 
     Assertions.assertEquals(Integer.valueOf(1), left_left.getValue());
     Assertions.assertEquals(Integer.valueOf(8), left_right.getValue());
@@ -30,16 +30,16 @@ class BinarySearchTreeTests {
 
   @Test
   void createBinaryTree_testStructure_rightSubTree() {
-    BinarySearchTree<Integer>.Node root = bst.getRoot();
+    var root = bst.getRoot();
 
     Assertions.assertEquals(Integer.valueOf(12), root.getValue());
 
-    BinarySearchTree<Integer>.Node right = root.getRight();
+    var right = root.getRight();
 
     Assertions.assertEquals(Integer.valueOf(21), right.getValue());
 
-    BinarySearchTree<Integer>.Node right_left = right.getLeft();
-    BinarySearchTree<Integer>.Node right_right = right.getRight();
+    var right_left = right.getLeft();
+    var right_right = right.getRight();
 
     Assertions.assertEquals(Integer.valueOf(18), right_left.getValue());
     Assertions.assertEquals(Integer.valueOf(23), right_right.getValue());
@@ -47,25 +47,25 @@ class BinarySearchTreeTests {
 
   @Test
   void testContainsMethod_shouldReturnFalse() {
-    boolean contains = bst.contains(-10);
+    var contains = bst.contains(-10);
     Assertions.assertEquals(false, contains);
   }
 
   @Test
   void testContainsMethod_shouldReturnTrue() {
-    boolean contains = bst.contains(5);
+    var contains = bst.contains(5);
     Assertions.assertEquals(true, contains);
   }
 
   @Test
   void testSearch_CheckReturnedTreeStructure1() {
-    BinarySearchTree<Integer> search = bst.search(5);
+    var search = bst.search(5);
 
-    BinarySearchTree<Integer>.Node root = search.getRoot();
+    var root = search.getRoot();
     Assertions.assertEquals(Integer.valueOf(5), root.getValue());
 
-    BinarySearchTree<Integer>.Node left = root.getLeft();
-    BinarySearchTree<Integer>.Node right = root.getRight();
+    var left = root.getLeft();
+    var right = root.getRight();
 
     Assertions.assertEquals(Integer.valueOf(1), left.getValue());
     Assertions.assertEquals(Integer.valueOf(8), right.getValue());
@@ -78,50 +78,50 @@ class BinarySearchTreeTests {
     bst.insert(75);
     bst.insert(60);
 
-    BinarySearchTree<Integer> search = bst.search(23);
+    var search = bst.search(23);
 
-    BinarySearchTree<Integer>.Node root = search.getRoot();
+    var root = search.getRoot();
     Assertions.assertEquals(Integer.valueOf(23), root.getValue());
 
-    BinarySearchTree<Integer>.Node left = root.getLeft();
-    BinarySearchTree<Integer>.Node right = root.getRight();
+    var left = root.getLeft();
+    var right = root.getRight();
 
     Assertions.assertEquals(null, left);
     Assertions.assertEquals(Integer.valueOf(50), right.getValue());
 
-    BinarySearchTree<Integer>.Node right_left = right.getLeft();
-    BinarySearchTree<Integer>.Node right_right = right.getRight();
+    var right_left = right.getLeft();
+    var right_right = right.getRight();
 
     Assertions.assertEquals(null, right_left);
     Assertions.assertEquals(Integer.valueOf(100), right_right.getValue());
 
-    BinarySearchTree<Integer>.Node right_right_left = right_right.getLeft();
-    BinarySearchTree<Integer>.Node right_right_right = right_right.getRight();
+    var right_right_left = right_right.getLeft();
+    var right_right_right = right_right.getRight();
 
     Assertions.assertEquals(Integer.valueOf(75), right_right_left.getValue());
     Assertions.assertEquals(null, right_right_right);
 
-    BinarySearchTree<Integer>.Node right_right_left_left = right_right_left.getLeft();
+    var right_right_left_left = right_right_left.getLeft();
     Assertions.assertEquals(Integer.valueOf(60), right_right_left_left.getValue());
   }
 
   @Test
   void testRange_getAllNodes() {
-    Iterable<Integer> range = bst.range(0, 100);
+    var range = bst.range(0, 100);
 
-    Integer[] values = new Integer[]{1, 5, 8, 12, 18, 21, 23};
-    int index = 0;
-    for (Integer integer : range) {
+    var values = new Integer[]{1, 5, 8, 12, 18, 21, 23};
+    var index = 0;
+    for (var integer : range) {
       Assertions.assertEquals(values[index++], integer);
     }
   }
 
   @Test
   void testRange_shouldNotFindAnyNodes() {
-    Iterable<Integer> range = bst.range(-1, -1);
+    var range = bst.range(-1, -1);
 
     List<Integer> foundValues = new ArrayList<>();
-    for (Integer value : range) {
+    for (var value : range) {
       foundValues.add(value);
     }
 
@@ -130,22 +130,22 @@ class BinarySearchTreeTests {
 
   @Test
   void testRange_shouldFindOnlyOneElement() {
-    Iterable<Integer> range = bst.range(12, 12);
+    var range = bst.range(12, 12);
 
-    int index = 0;
-    Integer[] values = new Integer[]{12};
-    for (Integer value : range) {
+    var index = 0;
+    var values = new Integer[]{12};
+    for (var value : range) {
       Assertions.assertEquals(values[index], value);
     }
   }
 
   @Test
   void testRange_shouldFindNodes() {
-    Iterable<Integer> range = bst.range(5, 18);
+    var range = bst.range(5, 18);
 
-    int index = 0;
-    Integer[] values = new Integer[]{5, 8, 12, 18};
-    for (Integer value : range) {
+    var index = 0;
+    var values = new Integer[]{5, 8, 12, 18};
+    for (var value : range) {
       Assertions.assertEquals(values[index++], value);
     }
   }

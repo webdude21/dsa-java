@@ -15,16 +15,16 @@ class DoublyLinkedListTests {
     DoublyLinkedList<Integer> list = new DoublyLinkedList<>();
 
     list.addFirst(5);
-    int expectedSize = 1;
+    var expectedSize = 1;
     Assertions.assertEquals(expectedSize, list.size());
 
     List<Integer> items = new ArrayList<>();
-    for (Integer integer : list) {
+    for (var integer : list) {
       items.add(integer);
     }
 
-    int[] expectedArray = new int[]{5};
-    int[] array = items.stream().mapToInt(i -> i).toArray();
+    var expectedArray = new int[]{5};
+    var array = items.stream().mapToInt(i -> i).toArray();
     Assertions.assertArrayEquals(expectedArray, array);
   }
 
@@ -37,16 +37,16 @@ class DoublyLinkedListTests {
     list.addFirst(5);
     list.addFirst(3);
 
-    int expectedSize = 3;
+    var expectedSize = 3;
     Assertions.assertEquals(expectedSize, list.size());
 
     List<Integer> items = new ArrayList<>();
-    for (Integer integer : list) {
+    for (var integer : list) {
       items.add(integer);
     }
 
-    int[] expectedArray = new int[]{3, 5, 10};
-    int[] array = items.stream().mapToInt(i -> i).toArray();
+    var expectedArray = new int[]{3, 5, 10};
+    var array = items.stream().mapToInt(i -> i).toArray();
     Assertions.assertArrayEquals(expectedArray, array);
   }
 
@@ -55,16 +55,16 @@ class DoublyLinkedListTests {
     DoublyLinkedList<Integer> list = new DoublyLinkedList<>();
 
     list.addLast(5);
-    int expectedSize = 1;
+    var expectedSize = 1;
     Assertions.assertEquals(expectedSize, list.size());
 
     List<Integer> items = new ArrayList<>();
-    for (Integer integer : list) {
+    for (var integer : list) {
       items.add(integer);
     }
 
-    int[] expectedArray = new int[]{5};
-    int[] array = items.stream().mapToInt(i -> i).toArray();
+    var expectedArray = new int[]{5};
+    var array = items.stream().mapToInt(i -> i).toArray();
     Assertions.assertArrayEquals(expectedArray, array);
   }
 
@@ -76,16 +76,16 @@ class DoublyLinkedListTests {
     list.addLast(10);
     list.addLast(15);
 
-    int expectedSize = 3;
+    var expectedSize = 3;
     Assertions.assertEquals(expectedSize, list.size());
 
     List<Integer> items = new ArrayList<>();
-    for (Integer integer : list) {
+    for (var integer : list) {
       items.add(integer);
     }
 
-    int[] expectedArray = new int[]{5, 10, 15};
-    int[] array = items.stream().mapToInt(i -> i).toArray();
+    var expectedArray = new int[]{5, 10, 15};
+    var array = items.stream().mapToInt(i -> i).toArray();
     Assertions.assertArrayEquals(expectedArray, array);
   }
 
@@ -97,16 +97,16 @@ class DoublyLinkedListTests {
 
     int element = list.removeFirst();
 
-    int expectedElement = 5;
-    int expectedSize = 0;
+    var expectedElement = 5;
+    var expectedSize = 0;
     Assertions.assertEquals(expectedElement, element);
     Assertions.assertEquals(expectedSize, list.size());
 
     List<Integer> items = new ArrayList<>();
     list.forEach(items::add);
 
-    int[] expectedArray = new int[]{};
-    int[] array = items.stream().mapToInt(i -> i).toArray();
+    var expectedArray = new int[]{};
+    var array = items.stream().mapToInt(i -> i).toArray();
     Assertions.assertArrayEquals(expectedArray, array);
   }
 
@@ -127,18 +127,18 @@ class DoublyLinkedListTests {
 
     int element = list.removeFirst();
 
-    int expectedElement = 5;
-    int expectedSize = 2;
+    var expectedElement = 5;
+    var expectedSize = 2;
     Assertions.assertEquals(expectedElement, element);
     Assertions.assertEquals(expectedSize, list.size());
 
     List<Integer> items = new ArrayList<>();
-    for (Integer integer : list) {
+    for (var integer : list) {
       items.add(integer);
     }
 
-    int[] expectedArray = new int[]{6, 7};
-    int[] array = items.stream().mapToInt(i -> i).toArray();
+    var expectedArray = new int[]{6, 7};
+    var array = items.stream().mapToInt(i -> i).toArray();
     Assertions.assertArrayEquals(expectedArray, array);
   }
 
@@ -151,16 +151,16 @@ class DoublyLinkedListTests {
 
     int element = list.removeLast();
 
-    int expectedElement = 5;
-    int expectedSize = 0;
+    var expectedElement = 5;
+    var expectedSize = 0;
     Assertions.assertEquals(expectedElement, element);
     Assertions.assertEquals(expectedSize, list.size());
 
     List<Integer> items = new ArrayList<>();
     list.forEach(items::add);
 
-    int[] expectedArray = new int[]{};
-    int[] array = items.stream().mapToInt(i -> i).toArray();
+    var expectedArray = new int[]{};
+    var array = items.stream().mapToInt(i -> i).toArray();
     Assertions.assertArrayEquals(expectedArray, array);
   }
 
@@ -181,18 +181,18 @@ class DoublyLinkedListTests {
 
     int element = list.removeLast();
 
-    int expectedElement = 10;
-    int expectedSize = 2;
+    var expectedElement = 10;
+    var expectedSize = 2;
     Assertions.assertEquals(expectedElement, element);
     Assertions.assertEquals(expectedSize, list.size());
 
     List<Integer> items = new ArrayList<>();
-    for (Integer integer : list) {
+    for (var integer : list) {
       items.add(integer);
     }
 
-    int[] expectedArray = new int[]{8, 9};
-    int[] array = items.stream().mapToInt(i -> i).toArray();
+    var expectedArray = new int[]{8, 9};
+    var array = items.stream().mapToInt(i -> i).toArray();
     Assertions.assertArrayEquals(expectedArray, array);
   }
 
@@ -204,8 +204,8 @@ class DoublyLinkedListTests {
     List<Integer> items = new ArrayList<>();
     list.forEach(items::add);
 
-    int[] expectedArray = new int[]{};
-    int[] array = items.stream().mapToInt(i -> i).toArray();
+    var expectedArray = new int[]{};
+    var array = items.stream().mapToInt(i -> i).toArray();
     Assertions.assertArrayEquals(expectedArray, array);
   }
 
@@ -216,12 +216,12 @@ class DoublyLinkedListTests {
     list.addLast(5);
 
     List<Integer> items = new ArrayList<>();
-    for (Integer integer : list) {
+    for (var integer : list) {
       items.add(integer);
     }
 
-    int[] expectedArray = new int[]{5};
-    int[] array = items.stream().mapToInt(i -> i).toArray();
+    var expectedArray = new int[]{5};
+    var array = items.stream().mapToInt(i -> i).toArray();
     Assertions.assertArrayEquals(expectedArray, array);
   }
 
@@ -232,7 +232,7 @@ class DoublyLinkedListTests {
     list.addLast("Six");
     list.addLast("Seven");
 
-    String[] expectedArray = new String[]{"Five", "Six", "Seven"};
+    var expectedArray = new String[]{"Five", "Six", "Seven"};
     Object[] array = list.toArray();
     Assertions.assertArrayEquals(expectedArray, array);
   }
@@ -246,10 +246,10 @@ class DoublyLinkedListTests {
     list.addLast("Six");
     list.addLast("Seven");
 
-    String[] expectedArray = new String[]{"Five", "Six", "Seven"};
-    String[] array = new String[expectedArray.length];
-    int index = 0;
-    for (String s : expectedArray) {
+    var expectedArray = new String[]{"Five", "Six", "Seven"};
+    var array = new String[expectedArray.length];
+    var index = 0;
+    for (var s : expectedArray) {
       array[index++] = s;
     }
 
@@ -258,16 +258,16 @@ class DoublyLinkedListTests {
 
   @Test
   void iterable_nonGeneric_multipleElements() {
-    DoublyLinkedList<Object> list = new DoublyLinkedList<>();
+    var list = new DoublyLinkedList<>();
 
     list.addLast("Five");
     list.addLast(6);
     list.addLast(7.77);
 
-    Object[] expectedArray = new Object[]{"Five", 6, 7.77};
-    Object[] array = new Object[expectedArray.length];
-    int index = 0;
-    for (Object o : expectedArray) {
+    var expectedArray = new Object[]{"Five", 6, 7.77};
+    var array = new Object[expectedArray.length];
+    var index = 0;
+    for (var o : expectedArray) {
       array[index++] = o;
     }
 
@@ -280,7 +280,7 @@ class DoublyLinkedListTests {
     DoublyLinkedList<String> list = new DoublyLinkedList<>();
 
     Object[] array = list.toArray();
-    String[] expectedArray = new String[0];
+    var expectedArray = new String[0];
 
     Assertions.assertArrayEquals(expectedArray, array);
   }
@@ -295,7 +295,7 @@ class DoublyLinkedListTests {
     list.addLast("Seven");
 
     Object[] array = list.toArray();
-    String[] expectedArray = new String[]{"Five", "Six", "Seven"};
+    var expectedArray = new String[]{"Five", "Six", "Seven"};
 
     Assertions.assertArrayEquals(expectedArray, array);
   }
