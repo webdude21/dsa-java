@@ -38,7 +38,7 @@ public class AtmMachine {
     if (resultAmount == remainingAmount) {
       return result;
     } else {
-      bills.remove(0);
+      bills.removeIf(bill -> bill.getAmount() == 5);
       return takeOut(bills, amount);
     }
   }

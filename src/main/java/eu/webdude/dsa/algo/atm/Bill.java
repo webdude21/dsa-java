@@ -1,5 +1,6 @@
 package eu.webdude.dsa.algo.atm;
 
+import java.util.List;
 import java.util.Objects;
 
 public class Bill implements Comparable<Bill> {
@@ -14,6 +15,10 @@ public class Bill implements Comparable<Bill> {
 
   public static Bill of(int amount, int count) {
     return new Bill(amount, count);
+  }
+
+  public static int sum(List<Bill> billList) {
+    return billList.stream().mapToInt(Bill::getTotal).sum();
   }
 
   @Override

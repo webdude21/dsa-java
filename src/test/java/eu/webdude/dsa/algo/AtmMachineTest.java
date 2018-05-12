@@ -28,8 +28,10 @@ public class AtmMachineTest implements ArgumentsProvider {
   @Override
   public Stream<? extends Arguments> provideArguments(ExtensionContext extensionContext) {
     return Stream.of(
+      Arguments.of(bills, 6, Collections.singletonList(Bill.of(2, 3))),
       Arguments.of(bills, 8, Collections.singletonList(Bill.of(2, 4))),
       Arguments.of(bills, 7, Arrays.asList(Bill.of(5, 1), Bill.of(2, 1))),
+      Arguments.of(bills, 13, Arrays.asList(Bill.of(5, 1), Bill.of(2, 4))),
       Arguments.of(bills, 17, Arrays.asList(Bill.of(10, 1), Bill.of(5, 1), Bill.of(2, 1))),
       Arguments.of(bills, 18, Arrays.asList(Bill.of(10, 1), Bill.of(2, 4))),
       Arguments.of(bills, 118, Arrays.asList(Bill.of(100, 1), Bill.of(10, 1), Bill.of(2, 4)))
