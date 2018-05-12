@@ -12,18 +12,13 @@ public class AtmMachine {
     Collections.sort(bills);
   }
 
-  public List<Bill> takeOut(int amount) {
-    return takeOut(bills, amount);
-  }
-
-  private List<Bill> takeOut(List<Bill> inputBills, int amount) {
-    var bills = new ArrayList<>(inputBills);
+  private static List<Bill> takeOut(List<Bill> availableBills, int amount) {
     List<Bill> result = new ArrayList<>();
     var resultAmount = 0;
     var remainingAmount = amount;
 
-    for (int i = 0, billsSize = bills.size(); i < billsSize; i++) {
-      var bill = bills.get(i);
+    for (int i = 0, billsSize = availableBills.size(); i < billsSize; i++) {
+      var bill = availableBills.get(i);
 
       var billCountToTake = (int) Math.floor(((double) remainingAmount) / ((double) bill.getAmount()));
       billCountToTake = Math.min(billCountToTake, bill.getCount());
@@ -31,7 +26,7 @@ public class AtmMachine {
       if (remainingAmount / bill.getAmount() > 0) {
         var newBill = Bill.of(bill.getAmount(), billCountToTake);
         result.add(newBill);
-        bills.set(i, bill.subtract(billCountToTake));
+        availableBills.set(i, bill.subtract(billCountToTake));
         remainingAmount -= newBill.getTotal();
       }
     }
@@ -39,8 +34,12 @@ public class AtmMachine {
     if (resultAmount == remainingAmount) {
       return result;
     } else {
-      bills.removeIf(bill -> bill.getAmount() == 5);
-      return takeOut(bills, amount);
+      availableBills.removeIf(bill -> bill.getAmount() == 5);
+      return takeOut(availableBills, amount);
     }
+  }
+
+  public List<Bill> takeOut(int amount) {
+    return takeOut(new ArrayList<>(bills), amount);
   }
 }
