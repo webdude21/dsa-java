@@ -16,7 +16,8 @@ public class AtmMachine {
     return takeOut(bills, amount);
   }
 
-  private List<Bill> takeOut(List<Bill> bills, int amount) {
+  private List<Bill> takeOut(List<Bill> inputBills, int amount) {
+    var bills = new ArrayList<>(inputBills);
     List<Bill> result = new ArrayList<>();
     var resultAmount = 0;
     var remainingAmount = amount;
