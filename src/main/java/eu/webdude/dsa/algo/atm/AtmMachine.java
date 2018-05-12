@@ -13,14 +13,14 @@ public class AtmMachine {
   }
 
   private static List<Bill> takeOut(List<Bill> availableBills, int amount) {
-    List<Bill> result = new ArrayList<>();
+    var result = new ArrayList<Bill>();
     var resultAmount = 0;
     var remainingAmount = amount;
 
-    for (int i = 0, billsSize = availableBills.size(); i < billsSize; i++) {
+    for (var i = 0; i < availableBills.size(); i++) {
       var bill = availableBills.get(i);
 
-      var billCountToTake = (int) Math.floor(((double) remainingAmount) / ((double) bill.getAmount()));
+      var billCountToTake = remainingAmount / bill.getAmount();
       billCountToTake = Math.min(billCountToTake, bill.getCount());
 
       if (remainingAmount / bill.getAmount() > 0) {
