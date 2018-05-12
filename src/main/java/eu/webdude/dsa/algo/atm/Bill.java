@@ -1,5 +1,7 @@
 package eu.webdude.dsa.algo.atm;
 
+import java.util.Objects;
+
 public class Bill implements Comparable<Bill> {
 
   private final int amount;
@@ -14,16 +16,22 @@ public class Bill implements Comparable<Bill> {
     return new Bill(amount, count);
   }
 
-  public Bill substract(int amountToSubstract) {
-    return new Bill(getAmount(), getCount() - amountToSubstract);
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof Bill)) return false;
+    Bill bill = (Bill) o;
+    return getAmount() == bill.getAmount() &&
+      getCount() == bill.getCount();
   }
 
-  public int getAmount() {
-    return amount;
+  @Override
+  public int hashCode() {
+    return Objects.hash(getAmount(), getCount());
   }
 
-  public int getCount() {
-    return count;
+  public int getTotal() {
+    return amount * count;
   }
 
   @Override
@@ -33,5 +41,17 @@ public class Bill implements Comparable<Bill> {
     }
 
     return Integer.compare(o.amount, this.amount);
+  }
+
+  Bill subtract(int amountToSubstract) {
+    return new Bill(getAmount(), getCount() - amountToSubstract);
+  }
+
+  int getAmount() {
+    return amount;
+  }
+
+  int getCount() {
+    return count;
   }
 }

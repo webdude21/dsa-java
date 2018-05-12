@@ -19,24 +19,26 @@ public class AtmMachine {
   private List<Bill> takeOut(List<Bill> bills, int amount) {
     List<Bill> result = new ArrayList<>();
     var resultAmount = 0;
+    var remainingAmount = amount;
 
     for (int i = 0, billsSize = bills.size(); i < billsSize; i++) {
+      var bill = bills.get(i);
 
+      var billCountToTake = (int) Math.floor(((double) remainingAmount) / ((double) bill.getAmount()));
+      billCountToTake = Math.min(billCountToTake, bill.getCount());
 
-      Bill bill = bills.get(i);
-      int billCount = (int) Math.floor(amount / bill.getAmount());
-      billCount = Math.min(billCount, bill.getCount());
-
-      if (amount / bill.getAmount() >= 0) {
-        result.add(Bill.of(bill.getAmount(), billCount));
-        bills.set(i, bill.substract(billCount));
+      if (remainingAmount / bill.getAmount() > 0) {
+        var newBill = Bill.of(bill.getAmount(), billCountToTake);
+        result.add(newBill);
+        bills.set(i, bill.subtract(billCountToTake));
+        remainingAmount -= newBill.getTotal();
       }
     }
 
-    if (resultAmount == amount) {
+    if (resultAmount == remainingAmount) {
       return result;
     } else {
-      bills.remove(bills.size() - 1);
+      bills.remove(0);
       return takeOut(bills, amount);
     }
   }

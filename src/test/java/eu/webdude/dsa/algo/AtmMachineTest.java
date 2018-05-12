@@ -17,24 +17,27 @@ import java.util.stream.Stream;
 public class AtmMachineTest implements ArgumentsProvider {
 
   private List<Bill> bills = Arrays.asList(
-    Bill.of(91, 2),
-    Bill.of(26, 5),
-    Bill.of(83, 10),
-    Bill.of(58, 20),
-    Bill.of(15, 50),
-    Bill.of(10, 100)
+    Bill.of(2, 91),
+    Bill.of(5, 26),
+    Bill.of(10, 83),
+    Bill.of(20, 58),
+    Bill.of(50, 15),
+    Bill.of(100, 10)
   );
 
   @Override
   public Stream<? extends Arguments> provideArguments(ExtensionContext extensionContext) {
     return Stream.of(
-      Arguments.of(bills, 7, Arrays.asList(Bill.of(2, 1), Bill.of(5, 1)))
+      Arguments.of(bills, 8, Collections.singletonList(Bill.of(2, 4))),
+      Arguments.of(bills, 7, Arrays.asList(Bill.of(2, 1), Bill.of(5, 1))),
+      Arguments.of(bills, 17, Arrays.asList(Bill.of(10, 1), Bill.of(5, 1), Bill.of(2, 1))),
+      Arguments.of(bills, 18, Arrays.asList(Bill.of(10, 1), Bill.of(2, 4)))
     );
   }
 
   @ParameterizedTest
   @ArgumentsSource(AtmMachineTest.class)
-  void name(List<Bill> bills, int takeOutAmount, List<Bill> expected) {
+  void testForCertainBillSizes(List<Bill> bills, int takeOutAmount, List<Bill> expected) {
     AtmMachine atmMachine = new AtmMachine(bills);
 
     Collections.sort(expected);
@@ -42,5 +45,17 @@ public class AtmMachineTest implements ArgumentsProvider {
     List<Bill> actualBills = atmMachine.takeOut(takeOutAmount);
 
     Assertions.assertArrayEquals(actualBills.toArray(), expected.toArray());
+  }
+
+  @ParameterizedTest
+  @ArgumentsSource(AtmMachineTest.class)
+  void testIfAmountIsOk(List<Bill> bills, int takeOutAmount, List<Bill> expected) {
+    AtmMachine atmMachine = new AtmMachine(bills);
+
+    Collections.sort(expected);
+
+    int actual = atmMachine.takeOut(takeOutAmount).stream().mapToInt(Bill::getTotal).sum();
+
+    Assertions.assertEquals(takeOutAmount, actual);
   }
 }
