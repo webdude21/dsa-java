@@ -3,7 +3,6 @@ package eu.webdude.dsa.algo;
 import eu.webdude.dsa.algo.atm.AtmMachine;
 import eu.webdude.dsa.algo.atm.Bill;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -35,11 +34,6 @@ public class AtmMachineTest implements ArgumentsProvider {
       Arguments.of(bills, 18, Arrays.asList(Bill.of(10, 1), Bill.of(2, 4))),
       Arguments.of(bills, 118, Arrays.asList(Bill.of(100, 1), Bill.of(10, 1), Bill.of(2, 4)))
     );
-  }
-
-  @BeforeEach
-  void setUp() {
-
   }
 
   @ParameterizedTest
