@@ -236,7 +236,7 @@ public class DoublyLinkedList<E> implements Iterable<E> {
         return true;
     }
 
-    public class Node<T> {
+  class Node<T> {
         private final T value;
 
         private Node<T> next;

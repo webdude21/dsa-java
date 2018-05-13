@@ -14,7 +14,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class AtmMachineTest implements ArgumentsProvider {
+class AtmMachineTest implements ArgumentsProvider {
 
   private List<Bill> bills = Arrays.asList(
     Bill.of(2, 91),

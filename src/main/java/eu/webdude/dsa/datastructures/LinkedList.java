@@ -2,7 +2,7 @@ package eu.webdude.dsa.datastructures;
 
 import java.util.Iterator;
 
-public class LinkedList<E> implements Iterable<E> {
+class LinkedList<E> implements Iterable<E> {
 
   private int size;
 
@@ -97,7 +97,7 @@ public class LinkedList<E> implements Iterable<E> {
     }
   }
 
-  public class Node<T> {
+  class Node<T> {
 
     private final T value;
 

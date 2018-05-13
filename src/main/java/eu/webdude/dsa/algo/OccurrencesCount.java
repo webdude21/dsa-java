@@ -5,7 +5,7 @@ import java.util.Scanner;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-class OccurencesCount {
+class OccurrencesCount {
 
   public static void main(String[] args) {
     var scanner = new Scanner(System.in);
