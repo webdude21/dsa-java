@@ -40,7 +40,7 @@ class AtmMachineTest implements ArgumentsProvider {
 
   @ParameterizedTest
   @ArgumentsSource(AtmMachineTest.class)
-  void testForCertainBillSizes(List<Bill> bills, int takeOutAmount, List<Bill> expected) {
+  void billsAreOfTheCorrectAmounts(List<Bill> bills, int takeOutAmount, List<Bill> expected) {
     var atmMachine = new AtmMachine(bills);
 
     var actualBills = atmMachine.takeOut(takeOutAmount);
@@ -50,7 +50,7 @@ class AtmMachineTest implements ArgumentsProvider {
 
   @ParameterizedTest
   @ArgumentsSource(AtmMachineTest.class)
-  void testIfAmountIsOk(List<Bill> bills, int takeOutAmount) {
+  void amountTakenOutIsCorrect(List<Bill> bills, int takeOutAmount) {
     var atmMachine = new AtmMachine(bills);
 
     var actual = atmMachine.takeOut(takeOutAmount).stream().mapToInt(Bill::getTotal).sum();
