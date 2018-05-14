@@ -1,19 +1,20 @@
 package eu.webdude.dsa.datastructures;
 
+import java.util.ArrayList;
 import java.util.function.Consumer;
 
-public class BinarySearchTree<T extends Comparable<T>> {
+class BinarySearchTree<T extends Comparable<T>> {
   private Node root;
 
-  public Node getRoot() {
+  Node getRoot() {
     return this.root;
   }
 
-  void setRoot(Node root) {
+  private void setRoot(Node root) {
     this.root = root;
   }
 
-  public void insert(T value) {
+  void insert(T value) {
     var node = new Node(value);
     var currentNode = root;
     var previousNode = root;
@@ -24,7 +25,6 @@ public class BinarySearchTree<T extends Comparable<T>> {
     }
 
     while (currentNode != null) {
-      var compareResult = currentNode.getValue().compareTo(value);
       previousNode = currentNode;
       currentNode = getNextNode(currentNode, value);
     }
@@ -36,11 +36,11 @@ public class BinarySearchTree<T extends Comparable<T>> {
     }
   }
 
-  public boolean contains(T value) {
+  boolean contains(T value) {
     return this.search(value).getRoot() != null;
   }
 
-  public BinarySearchTree<T> search(T item) {
+  BinarySearchTree<T> search(T item) {
     BinarySearchTree<T> result;
     var currentNode = root;
 
@@ -59,8 +59,17 @@ public class BinarySearchTree<T extends Comparable<T>> {
     return getBST(currentNode);
   }
 
-  public Iterable<T> range(T from, T to) {
-    throw new UnsupportedOperationException();
+  Iterable<T> range(T from, T to) {
+    var result = new ArrayList<T>();
+
+    eachInOrder(node -> {
+      boolean isInRange = node.compareTo(from) >= 0 && node.compareTo(to) <= 0;
+      if (isInRange) {
+        result.add(node);
+      }
+    }, root);
+
+    return result;
   }
 
   private BinarySearchTree<T> getBST(Node node) {
@@ -83,14 +92,14 @@ public class BinarySearchTree<T extends Comparable<T>> {
 
   private void doUnlessNull(Node node, Consumer<Node> consumer) {
     if (node != null) {
-      consumer.accept(this.root);
+      consumer.accept(node);
     }
   }
 
-  private void eachInOrder(Consumer<T> consumer) {
-    doUnlessNull(root.getLeft(), node -> eachInOrder(consumer));
+  private void eachInOrder(Consumer<T> consumer, Node root) {
+    doUnlessNull(root.getLeft(), node -> eachInOrder(consumer, root.getLeft()));
     doUnlessNull(root, node -> consumer.accept(node.getValue()));
-    doUnlessNull(root.getRight(), node -> eachInOrder(consumer));
+    doUnlessNull(root.getRight(), node -> eachInOrder(consumer, root.getRight()));
   }
 
   class Node {
@@ -104,7 +113,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
       this.value = value;
     }
 
-    public T getValue() {
+    T getValue() {
       return this.value;
     }
 
@@ -112,7 +121,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
       this.value = value;
     }
 
-    public Node getLeft() {
+    Node getLeft() {
       return this.left;
     }
 
@@ -120,7 +129,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
       this.left = left;
     }
 
-    public Node getRight() {
+    Node getRight() {
       return this.right;
     }
 

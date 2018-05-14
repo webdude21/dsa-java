@@ -48,13 +48,13 @@ class BinarySearchTreeTests {
   @Test
   void testContainsMethod_shouldReturnFalse() {
     var contains = bst.contains(-10);
-    Assertions.assertEquals(false, contains);
+    Assertions.assertFalse(contains);
   }
 
   @Test
   void testContainsMethod_shouldReturnTrue() {
     var contains = bst.contains(5);
-    Assertions.assertEquals(true, contains);
+    Assertions.assertTrue(contains);
   }
 
   @Test
@@ -86,20 +86,20 @@ class BinarySearchTreeTests {
     var left = root.getLeft();
     var right = root.getRight();
 
-    Assertions.assertEquals(null, left);
+    Assertions.assertNull(left);
     Assertions.assertEquals(Integer.valueOf(50), right.getValue());
 
     var right_left = right.getLeft();
     var right_right = right.getRight();
 
-    Assertions.assertEquals(null, right_left);
+    Assertions.assertNull(right_left);
     Assertions.assertEquals(Integer.valueOf(100), right_right.getValue());
 
     var right_right_left = right_right.getLeft();
     var right_right_right = right_right.getRight();
 
     Assertions.assertEquals(Integer.valueOf(75), right_right_left.getValue());
-    Assertions.assertEquals(null, right_right_right);
+    Assertions.assertNull(right_right_right);
 
     var right_right_left_left = right_right_left.getLeft();
     Assertions.assertEquals(Integer.valueOf(60), right_right_left_left.getValue());
@@ -148,6 +148,8 @@ class BinarySearchTreeTests {
     for (var value : range) {
       Assertions.assertEquals(values[index++], value);
     }
+
+    Assertions.assertEquals(index, values.length);
   }
 
   @BeforeEach
