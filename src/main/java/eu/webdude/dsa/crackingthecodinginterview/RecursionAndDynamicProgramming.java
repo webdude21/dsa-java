@@ -1,6 +1,9 @@
 package eu.webdude.dsa.crackingthecodinginterview;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.stream.IntStream;
 
 class RecursionAndDynamicProgramming {
@@ -17,23 +20,21 @@ class RecursionAndDynamicProgramming {
     }
   }
 
-  private static boolean findPathInAGrid(byte[][] grid, Deque<Position> path) {
-    Position currentPosition = path.peek();
+  private static boolean findPathInAGrid(byte[][] grid, Position currentPosition, Deque<Position> path) {
     assert currentPosition != null;
 
-    if (isAtTheExit(currentPosition, grid)) {
+    if (isAtTheExit(currentPosition, grid) || tryMove(currentPosition.down(), grid, path) || tryMove(currentPosition.left(), grid, path)) {
+      path.push(currentPosition);
       return true;
     }
 
-    return tryMove(currentPosition.down(), grid, path) || tryMove(currentPosition.left(), grid, path);
+    return false;
   }
 
   private static boolean tryMove(Position position, byte[][] grid, Deque<Position> path) {
     if (canMoveTo(position, grid)) {
-      path.push(position);
-      return findPathInAGrid(grid, path);
+      return findPathInAGrid(grid, position, path);
     } else {
-      path.removeLastOccurrence(position);
       return false;
     }
   }
@@ -56,12 +57,10 @@ class RecursionAndDynamicProgramming {
   }
 
   static List<Position> findPathInAGrid(byte[][] grid) {
-    Position startingPoint = Position.of(0, 0);
-    LinkedList<Position> resultPath = new LinkedList<>(Collections.singletonList(startingPoint));
-    boolean pathInAGridIsFound = findPathInAGrid(grid, resultPath);
+    LinkedList<Position> resultPath = new LinkedList<>();
+    boolean pathInAGridIsFound = findPathInAGrid(grid, Position.of(0, 0), resultPath);
 
     if (pathInAGridIsFound) {
-      Collections.reverse(resultPath);
       return resultPath;
     } else {
       return new ArrayList<>();
