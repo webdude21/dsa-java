@@ -10,20 +10,25 @@ class RecursionAndDynamicProgramming {
 
   private static final int CELL_IS_FREE = 0;
 
-  static int tripleStep(int n) {
+  static int jumpStep(int n, int maxJumpSize) {
     if (n < 0) {
       return 0;
     } else if (n == 0) {
       return 1;
     } else {
-      return IntStream.rangeClosed(1, 3).map(i -> tripleStep(n - i)).sum();
+      return IntStream.rangeClosed(1, maxJumpSize)
+        .map(i -> jumpStep(n - i, maxJumpSize))
+        .sum();
     }
   }
 
   private static boolean findPathInAGrid(byte[][] grid, Position currentPosition, Deque<Position> path) {
     assert currentPosition != null;
 
-    if (isAtTheExit(currentPosition, grid) || tryMove(currentPosition.down(), grid, path) || tryMove(currentPosition.left(), grid, path)) {
+    if (isAtTheExit(currentPosition, grid)
+      || tryMove(currentPosition.down(), grid, path)
+      || tryMove(currentPosition.left(), grid, path)) {
+
       path.push(currentPosition);
       return true;
     }
@@ -32,11 +37,7 @@ class RecursionAndDynamicProgramming {
   }
 
   private static boolean tryMove(Position position, byte[][] grid, Deque<Position> path) {
-    if (canMoveTo(position, grid)) {
-      return findPathInAGrid(grid, position, path);
-    } else {
-      return false;
-    }
+    return canMoveTo(position, grid) && findPathInAGrid(grid, position, path);
   }
 
   static boolean isAtTheExit(Position position, byte[][] grid) {

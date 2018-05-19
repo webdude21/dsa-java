@@ -8,6 +8,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class RecursionAndDynamicProgrammingTest {
 
+  private static final int MAX_JUMP_SIZE = 3;
+
   private static byte[][] grid = new byte[][]{
     new byte[]{0, 0, 0, 0, 0, 0, 1, 0},
     new byte[]{0, 0, 0, 0, 1, 0, 1, 0},
@@ -21,8 +23,8 @@ class RecursionAndDynamicProgrammingTest {
 
   @Test
   void tripleStep() {
-    assertEquals(7, RecursionAndDynamicProgramming.tripleStep(4));
-    assertEquals(927, RecursionAndDynamicProgramming.tripleStep(12));
+    assertEquals(7, RecursionAndDynamicProgramming.jumpStep(4, MAX_JUMP_SIZE));
+    assertEquals(927, RecursionAndDynamicProgramming.jumpStep(12, MAX_JUMP_SIZE));
   }
 
   @Test
