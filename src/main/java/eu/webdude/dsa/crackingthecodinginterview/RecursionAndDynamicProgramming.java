@@ -5,6 +5,8 @@ import java.util.stream.IntStream;
 
 class RecursionAndDynamicProgramming {
 
+  private static final int CELL_IS_FREE = 0;
+
   static int tripleStep(int n) {
     if (n < 0) {
       return 0;
@@ -30,10 +32,10 @@ class RecursionAndDynamicProgramming {
     if (canMoveTo(position, grid)) {
       path.push(position);
       return findPathInAGrid(grid, path);
+    } else {
+      path.removeLastOccurrence(position);
+      return false;
     }
-
-    path.clear();
-    return false;
   }
 
   static boolean isAtTheExit(Position position, byte[][] grid) {
@@ -49,7 +51,7 @@ class RecursionAndDynamicProgramming {
   }
 
   static boolean canMoveTo(Position position, byte[][] grid) {
-    return isInBounds(position, grid) && getValueAt(position, grid) == 0;
+    return isInBounds(position, grid) && getValueAt(position, grid) == CELL_IS_FREE;
 
   }
 

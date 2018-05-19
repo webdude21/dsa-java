@@ -1,5 +1,7 @@
 package eu.webdude.dsa.crackingthecodinginterview;
 
+import java.util.Objects;
+
 class Position {
 
   final Integer row;
@@ -13,6 +15,20 @@ class Position {
 
   static Position of(Integer row, Integer col) {
     return new Position(row, col);
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof Position)) return false;
+    Position position = (Position) o;
+    return Objects.equals(row, position.row) &&
+      Objects.equals(col, position.col);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(row, col);
   }
 
   Position left() {
