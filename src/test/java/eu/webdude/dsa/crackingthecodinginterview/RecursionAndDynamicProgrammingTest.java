@@ -33,6 +33,12 @@ class RecursionAndDynamicProgrammingTest {
     assertEquals(expected, RecursionAndDynamicProgramming.findMagicIndex(input));
   }
 
+  @ParameterizedTest
+  @ArgumentsSource(MagicIndexArgumentProvider.class)
+  void findExistingMagicIndexWithBinarySearch(int expected, int[] input) {
+    assertEquals(expected, RecursionAndDynamicProgramming.findMagicIndexWithBinarySearch(input));
+  }
+
   static class MagicIndexArgumentProvider implements ArgumentsProvider {
 
     @Override

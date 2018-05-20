@@ -59,7 +59,7 @@ class RecursionAndDynamicProgramming {
 
   static List<Position> findPathInAGrid(byte[][] grid) {
     LinkedList<Position> resultPath = new LinkedList<>();
-    boolean pathInAGridIsFound = findPathInAGrid(grid, Position.of(0, 0), resultPath);
+    var pathInAGridIsFound = findPathInAGrid(grid, Position.of(0, 0), resultPath);
 
     if (pathInAGridIsFound) {
       return resultPath;
@@ -74,5 +74,38 @@ class RecursionAndDynamicProgramming {
       .filter(i -> i == input[i])
       .findFirst()
       .orElse(-1);
+  }
+
+  static int findMagicIndexWithBinarySearch(int[] input) {
+    return findMagicIndexWithBinarySearch(input, 0, input.length - 1);
+  }
+
+  private static int findMagicIndexWithBinarySearch(int[] input, int start, int end) {
+    if (end < start) {
+      return -1;
+    }
+
+    var midPoint = (start + end) / 2;
+    var midValue = input[midPoint];
+
+    if (midPoint == midValue) {
+      return midPoint;
+    }
+
+    var leftIndex = Math.min(midPoint - 1, midValue);
+    var left = findMagicIndexWithBinarySearch(input, start, leftIndex);
+
+    if (left >= 0) {
+      return left;
+    }
+
+    var rightIndex = Math.max(midPoint + 1, midValue);
+    var right = findMagicIndexWithBinarySearch(input, rightIndex, end);
+
+    if (right >= 0) {
+      return right;
+    }
+
+    return -1;
   }
 }
