@@ -30,7 +30,7 @@ class RecursionAndDynamicProgrammingTest {
   @ParameterizedTest
   @ArgumentsSource(MagicIndexArgumentProvider.class)
   void findExistingMagicIndex(int expected, int[] input) {
-    int actual = RecursionAndDynamicProgramming.findMagicIndex(input);
+    var actual = RecursionAndDynamicProgramming.findMagicIndex(input);
     assertEquals(expected, actual);
   }
 
@@ -52,7 +52,7 @@ class RecursionAndDynamicProgrammingTest {
 
   @Test
   void robotInAGrid() {
-    List<Position> pathInAGrid = RecursionAndDynamicProgramming.findPathInAGrid(grid);
+    var pathInAGrid = RecursionAndDynamicProgramming.findPathInAGrid(grid);
     assertFalse(pathInAGrid.size() == 0, "There should be a valid path here.");
     verifyAllowedMoves(pathInAGrid);
   }
@@ -77,12 +77,12 @@ class RecursionAndDynamicProgrammingTest {
   }
 
   private void verifyAllowedMoves(List<Position> pathInAGrid) {
-    for (int i = 1; i < pathInAGrid.size(); i++) {
-      Position currentStep = pathInAGrid.get(i);
-      Position previousStep = pathInAGrid.get(i - 1);
+    for (var i = 1; i < pathInAGrid.size(); i++) {
+      var currentStep = pathInAGrid.get(i);
+      var previousStep = pathInAGrid.get(i - 1);
 
-      boolean moveDown = currentStep.row - previousStep.row == 1;
-      boolean moveRight = currentStep.col - previousStep.col == 1;
+      var moveDown = currentStep.row - previousStep.row == 1;
+      var moveRight = currentStep.col - previousStep.col == 1;
 
       assertFalse(moveDown && moveRight, "The robot should either move down or right, but not both!");
       assertTrue(moveDown || moveRight, "The robot should either move down or right!");
