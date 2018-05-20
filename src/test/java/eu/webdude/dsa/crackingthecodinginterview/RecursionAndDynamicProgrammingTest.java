@@ -30,8 +30,7 @@ class RecursionAndDynamicProgrammingTest {
   @ParameterizedTest
   @ArgumentsSource(MagicIndexArgumentProvider.class)
   void findExistingMagicIndex(int expected, int[] input) {
-    var actual = RecursionAndDynamicProgramming.findMagicIndex(input);
-    assertEquals(expected, actual);
+    assertEquals(expected, RecursionAndDynamicProgramming.findMagicIndex(input));
   }
 
   static class MagicIndexArgumentProvider implements ArgumentsProvider {
@@ -39,7 +38,10 @@ class RecursionAndDynamicProgrammingTest {
     @Override
     public Stream<? extends Arguments> provideArguments(ExtensionContext extensionContext) {
       return Stream.of(
-        Arguments.of(7, new int[]{-40, -20, -1, 1, 2, 3, 5, 7, 9, 12, 13})
+        Arguments.of(7, new int[]{-40, -20, -1, 1, 2, 3, 5, 7, 9, 12, 13}),
+        Arguments.of(0, new int[]{0, 1, 2, 3, 4, 5, 6}),
+        Arguments.of(-1, new int[]{1, 2, 3, 4, 5, 6}),
+        Arguments.of(2, new int[]{-10, -5, 2, 2, 2, 3, 4, 7, 9, 12, 13})
       );
     }
   }
