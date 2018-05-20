@@ -67,4 +67,12 @@ class RecursionAndDynamicProgramming {
       return new ArrayList<>();
     }
   }
+
+  static int findMagicIndex(int[] input) {
+    return IntStream
+      .range(0, input.length)
+      .filter(i -> i == input[i])
+      .findFirst()
+      .orElse(-1);
+  }
 }

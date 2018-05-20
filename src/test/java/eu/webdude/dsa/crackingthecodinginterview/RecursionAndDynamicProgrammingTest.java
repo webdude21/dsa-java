@@ -1,8 +1,14 @@
 package eu.webdude.dsa.crackingthecodinginterview;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtensionContext;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.ArgumentsProvider;
+import org.junit.jupiter.params.provider.ArgumentsSource;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,6 +26,23 @@ class RecursionAndDynamicProgrammingTest {
     new byte[]{0, 0, 0, 0, 1, 0, 1, 0},
     new byte[]{0, 0, 0, 0, 0, 0, 0, 0}
   };
+
+  @ParameterizedTest
+  @ArgumentsSource(MagicIndexArgumentProvider.class)
+  void findExistingMagicIndex(int expected, int[] input) {
+    int actual = RecursionAndDynamicProgramming.findMagicIndex(input);
+    assertEquals(expected, actual);
+  }
+
+  static class MagicIndexArgumentProvider implements ArgumentsProvider {
+
+    @Override
+    public Stream<? extends Arguments> provideArguments(ExtensionContext extensionContext) {
+      return Stream.of(
+        Arguments.of(7, new int[]{-40, -20, -1, 1, 2, 3, 5, 7, 9, 12, 13})
+      );
+    }
+  }
 
   @Test
   void tripleStep() {
