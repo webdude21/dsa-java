@@ -1,8 +1,6 @@
 package eu.webdude.dsa.algo.atm;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class AtmMachine {
   private List<Bill> bills;
@@ -12,45 +10,43 @@ public class AtmMachine {
     Collections.sort(bills);
   }
 
-  private static List<Bill> takeOut(List<Bill> availableBills, int amount) {
-    var result = new ArrayList<Bill>();
-    var remainingAmount = amount;
-
-    for (var i = 0; i < availableBills.size(); i++) {
-      var bill = availableBills.get(i);
-
-      var billCountToTake = remainingAmount / bill.getAmount();
-      billCountToTake = Math.min(billCountToTake, bill.getCount());
-
-      if (remainingAmount / bill.getAmount() > 0) {
-        var newBill = Bill.of(bill.getAmount(), billCountToTake);
-        result.add(newBill);
-        availableBills.set(i, bill.subtract(billCountToTake));
-        remainingAmount -= newBill.getTotal();
-      }
-    }
-
-    return result;
+  public List<Bill> takeOut(int amount) {
+    Deque<Bill> availableBills = new LinkedList<>(this.bills);
+    List<Bill> resultBills = new ArrayList<>();
+    takeOut(availableBills, resultBills, amount, amount);
+    return resultBills;
   }
 
-  public List<Bill> takeOut(int amount) {
-    ArrayList<Bill> availableBills = new ArrayList<>(this.bills);
-    List<Bill> bills = takeOut(availableBills, amount);
-
-    if (amount == Bill.sum(bills)) {
-      return bills;
+  private void takeOut(Deque<Bill> availableBills, List<Bill> results, int remainingAmount, int totalAmount) {
+    if (Bill.sum(results) == totalAmount) {
+      return;
     }
 
-    for (int i = 0; i < availableBills.size(); i++) {
-      Bill removedBill = availableBills.remove(i);
-      List<Bill> resultBills = takeOut(availableBills, amount);
-      if (Bill.sum(resultBills) == amount) {
-        return resultBills;
-      } else {
-        availableBills.add(i, removedBill);
+    if (availableBills.size() == 0) {
+      return;
+    }
+
+    Bill currentBill = availableBills.pop();
+
+    int coveredCount = remainingAmount / currentBill.getAmount();
+
+    while (coveredCount > 0) {
+      int newRemainingAmount = remainingAmount - coveredCount * currentBill.getAmount();
+      var newResultEntry = Bill.of(currentBill.getAmount(), coveredCount);
+      results.add(newResultEntry);
+      takeOut(new LinkedList<>(availableBills), results, newRemainingAmount, remainingAmount);
+
+      if (Bill.sum(results) == totalAmount) {
+        break;
       }
+
+      results.remove(newResultEntry);
+      coveredCount--;
     }
 
-    return bills;
+    if (availableBills.size() > 0) {
+      takeOut(new LinkedList<>(availableBills), results, remainingAmount, totalAmount);
+    }
+
   }
 }
