@@ -1,10 +1,10 @@
 package eu.webdude.dsa.crackingthecodinginterview;
 
-
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.function.Function;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -47,12 +47,11 @@ class StringChallengesTest {
     assertEquals("a2b1c5a2b1", StringChallenges.compress("aabcccccaab"));
   }
 
-  @Test
-  void positiveTestForPalindrome() {
-    var testInputs = Arrays.asList("anna", "Civic", "kayak", "level", "madam", "noon", "racecar",
-      "radar", "redder", "refer", "repaper", "rotator", "rotor", "sagas", "solos", "stats", "tenet", "wow");
-
-    testInputs.forEach(s -> assertTrue(StringChallenges.isPalindrome(s)));
+  @ParameterizedTest
+  @ValueSource(strings = {"anna", "Civic", "kayak", "level", "madam", "noon", "racecar", "radar", "redder",
+    "refer", "repaper", "rotator", "rotor", "sagas", "solos", "stats", "tenet", "wow"})
+  void positiveTestForPalindrome(String palindromeCandidate) {
+    assertTrue(StringChallenges.isPalindrome(palindromeCandidate));
   }
 
   @Test
@@ -65,15 +64,15 @@ class StringChallengesTest {
     assertFalse(StringChallenges.isPalindrome("testing"));
   }
 
-  @Test
-  void positiveTestWithAllUniqueCharacters() {
-    var testInputs = Arrays.asList("abcd", "abcdABCDФГфг", "abcdABCDФГфг");
-    allCharsImplementations.forEach(allChars -> testInputs.forEach(input -> assertTrue(allChars.apply(input))));
+  @ParameterizedTest
+  @ValueSource(strings = {"abcd", "abcdABCDФГфг", "abcdABCDФГфг"})
+  void positiveTestWithAllUniqueCharacters(String input) {
+    allCharsImplementations.forEach(allChars -> assertTrue(allChars.apply(input)));
   }
 
-  @Test
-  void negativeTestWithAllRepeatingCharacters() {
-    var testInputs = Arrays.asList("abcda", "abcdABCDФГфгa");
-    allCharsImplementations.forEach(allChars -> testInputs.forEach(input -> assertFalse(allChars.apply(input))));
+  @ParameterizedTest
+  @ValueSource(strings = {"abcda", "abcdABCDФГфгa"})
+  void negativeTestWithAllRepeatingCharacters(String input) {
+    allCharsImplementations.forEach(allChars -> assertFalse(allChars.apply(input)));
   }
 }

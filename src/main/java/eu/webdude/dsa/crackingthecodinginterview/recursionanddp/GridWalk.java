@@ -1,26 +1,14 @@
-package eu.webdude.dsa.crackingthecodinginterview;
+package eu.webdude.dsa.crackingthecodinginterview.recursionanddp;
+
 
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.IntStream;
 
-class RecursionAndDynamicProgramming {
+class GridWalk {
 
   private static final int CELL_IS_FREE = 0;
-
-  static int jumpStep(int n, int maxJumpSize) {
-    if (n < 0) {
-      return 0;
-    } else if (n == 0) {
-      return 1;
-    } else {
-      return IntStream.rangeClosed(1, maxJumpSize)
-        .map(i -> jumpStep(n - i, maxJumpSize))
-        .sum();
-    }
-  }
 
   private static boolean findPathInAGrid(byte[][] grid, Position currentPosition, Deque<Position> path) {
     assert currentPosition != null;
@@ -66,46 +54,5 @@ class RecursionAndDynamicProgramming {
     } else {
       return new ArrayList<>();
     }
-  }
-
-  static int findMagicIndex(int[] input) {
-    return IntStream
-      .range(0, input.length)
-      .filter(i -> i == input[i])
-      .findFirst()
-      .orElse(-1);
-  }
-
-  static int findMagicIndexWithBinarySearch(int[] input) {
-    return findMagicIndexWithBinarySearch(input, 0, input.length - 1);
-  }
-
-  private static int findMagicIndexWithBinarySearch(int[] input, int start, int end) {
-    if (end < start) {
-      return -1;
-    }
-
-    var midPoint = (start + end) / 2;
-    var midValue = input[midPoint];
-
-    if (midPoint == midValue) {
-      return midPoint;
-    }
-
-    var leftIndex = Math.min(midPoint - 1, midValue);
-    var left = findMagicIndexWithBinarySearch(input, start, leftIndex);
-
-    if (left >= 0) {
-      return left;
-    }
-
-    var rightIndex = Math.max(midPoint + 1, midValue);
-    var right = findMagicIndexWithBinarySearch(input, rightIndex, end);
-
-    if (right >= 0) {
-      return right;
-    }
-
-    return -1;
   }
 }

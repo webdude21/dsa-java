@@ -35,7 +35,7 @@ public class Bill implements Comparable<Bill> {
     return Objects.hash(getAmount(), getCount());
   }
 
-  public int getTotal() {
+  private int getTotal() {
     return amount * count;
   }
 
@@ -61,7 +61,7 @@ public class Bill implements Comparable<Bill> {
     return amount;
   }
 
-  int getCount() {
+  private int getCount() {
     return count;
   }
 }

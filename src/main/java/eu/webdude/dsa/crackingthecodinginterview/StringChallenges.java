@@ -32,7 +32,7 @@ class StringChallenges {
     return Arrays.equals(aCharArr, bCharArr);
   }
 
-  public static boolean isOneAway(String a, String b) {
+  static boolean isOneAway(String a, String b) {
     var maxEdits = 1;
 
     if (Math.abs(a.length() - b.length()) > maxEdits) {
@@ -68,7 +68,7 @@ class StringChallenges {
     return true;
   }
 
-  public static boolean isPalindrome(String input) {
+  static boolean isPalindrome(String input) {
     var processedInput = input.replaceAll("\\W", "").toLowerCase();
 
     for (var i = 0; i < processedInput.length() / 2; i++) {
@@ -80,7 +80,7 @@ class StringChallenges {
     return true;
   }
 
-  public static boolean isPermutationOfPalindrome(String input) {
+  static boolean isPermutationOfPalindrome(String input) {
     var processedInput = input.replaceAll("\\W", "").toLowerCase();
     Predicate<Long> isEven = val -> val / 2 == 0;
 
@@ -96,7 +96,7 @@ class StringChallenges {
     return unevenOccurrences == 0 || unevenOccurrences == 1 && !isEven.test((long) processedInput.length());
   }
 
-  public static String compress(String input) {
+  static String compress(String input) {
     var stringBuilder = new StringBuilder(input.length() + 30);
 
     var currentLetterCount = 1;
@@ -122,7 +122,7 @@ class StringChallenges {
     return stringBuilder.length() >= input.length() ? input : stringBuilder.toString();
   }
 
-  public static boolean isRotation(String a, String b) {
+  static boolean isRotation(String a, String b) {
     return (a + a).contains(b);
   }
 }
