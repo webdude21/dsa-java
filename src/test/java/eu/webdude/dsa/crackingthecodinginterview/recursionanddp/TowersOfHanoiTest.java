@@ -18,15 +18,17 @@ class TowersOfHanoiTest implements ArgumentsProvider {
   @Override
   public Stream<? extends Arguments> provideArguments(ExtensionContext extensionContext) {
     return Stream.of(
-      Arguments.of(Arrays.asList(10, 7, 5, 3, 2, 1))
+      Arguments.of(Arrays.asList(10, 7, 5, 3, 2, 1)),
+      Arguments.of(Arrays.asList(25, 14, 12, 7, 4, -121)),
+      Arguments.of(Arrays.asList("Zero", "Ten", "Eleven", "Average"))
     );
   }
 
   @ParameterizedTest
   @ArgumentsSource(TowersOfHanoiTest.class)
-  void towersOfHanoiTest(List<Integer> disks) {
+  <T> void towersOfHanoiTest(List<T> disks) {
     var instance = new TowersOfHanoi<>(new ArrayDeque<>(disks));
-    Deque<Integer> result = instance.solve();
+    Deque<T> result = instance.solve();
     Assertions.assertArrayEquals(disks.toArray(), result.toArray());
   }
 }

@@ -3,7 +3,7 @@ package eu.webdude.dsa.crackingthecodinginterview.recursionanddp;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-class TowersOfHanoi<T extends Comparable<T>> {
+class TowersOfHanoi<T> {
 
   private final Deque<T> firstTower;
   private final Deque<T> secondTower;
