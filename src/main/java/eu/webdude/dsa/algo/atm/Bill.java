@@ -48,6 +48,11 @@ public class Bill implements Comparable<Bill> {
     return Integer.compare(o.amount, this.amount);
   }
 
+  @Override
+  public String toString() {
+    return String.format("%dx%d", amount, count);
+  }
+
   Bill subtract(int amountToSubstract) {
     return new Bill(getAmount(), getCount() - amountToSubstract);
   }
