@@ -18,11 +18,7 @@ public class AtmMachine {
   }
 
   private void takeOut(Deque<Bill> availableBills, List<Bill> results, int remainingAmount, int totalAmount) {
-    if (isSumComplete(results, totalAmount)) {
-      return;
-    }
-
-    if (availableBills.size() == 0) {
+    if (isSumComplete(results, totalAmount) || availableBills.size() == 0) {
       return;
     }
 
