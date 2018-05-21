@@ -18,7 +18,7 @@ public class AtmMachine {
   }
 
   private void takeOut(Deque<Bill> availableBills, List<Bill> results, int remainingAmount, int totalAmount) {
-    if (Bill.sum(results) == totalAmount) {
+    if (isSumComplete(results, totalAmount)) {
       return;
     }
 
@@ -34,9 +34,14 @@ public class AtmMachine {
       int newRemainingAmount = remainingAmount - coveredCount * currentBill.getAmount();
       var newResultEntry = Bill.of(currentBill.getAmount(), coveredCount);
       results.add(newResultEntry);
+
+      if (newRemainingAmount == 0) {
+        return;
+      }
+
       takeOut(new LinkedList<>(availableBills), results, newRemainingAmount, remainingAmount);
 
-      if (Bill.sum(results) == totalAmount) {
+      if (isSumComplete(results, totalAmount)) {
         break;
       }
 
@@ -47,6 +52,9 @@ public class AtmMachine {
     if (availableBills.size() > 0) {
       takeOut(new LinkedList<>(availableBills), results, remainingAmount, totalAmount);
     }
+  }
 
+  private boolean isSumComplete(List<Bill> results, int totalAmount) {
+    return Bill.sum(results) == totalAmount;
   }
 }

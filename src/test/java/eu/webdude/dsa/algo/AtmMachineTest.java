@@ -53,7 +53,7 @@ class AtmMachineTest implements ArgumentsProvider {
   void amountTakenOutIsCorrect(List<Bill> bills, int takeOutAmount) {
     var atmMachine = new AtmMachine(bills);
 
-    var actual = atmMachine.takeOut(takeOutAmount).stream().mapToInt(Bill::getTotal).sum();
+    int actual = Bill.sum(atmMachine.takeOut(takeOutAmount));
 
     Assertions.assertEquals(takeOutAmount, actual);
   }
