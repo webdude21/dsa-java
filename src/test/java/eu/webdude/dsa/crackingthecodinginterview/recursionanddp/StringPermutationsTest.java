@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.ArgumentsProvider;
 import org.junit.jupiter.params.provider.ArgumentsSource;
 
+import java.util.Arrays;
 import java.util.stream.Stream;
 
 class StringPermutationsTest {
@@ -14,7 +15,10 @@ class StringPermutationsTest {
   @ParameterizedTest
   @ArgumentsSource(PermsWithoutDupsArgumentsProvider.class)
   void permutationsWithoutDuplicates(String input, String[] expected) {
-    Assertions.assertArrayEquals(expected, StringPermutations.permutationsWithoutDuplicates(input).toArray());
+    Object[] actual = StringPermutations.permutationsWithoutDuplicates(input).toArray();
+    Arrays.sort(actual);
+    Arrays.sort(expected);
+    Assertions.assertArrayEquals(expected, actual);
   }
 
   private static class PermsWithoutDupsArgumentsProvider implements ArgumentsProvider {
@@ -22,7 +26,7 @@ class StringPermutationsTest {
     @Override
     public Stream<? extends Arguments> provideArguments(ExtensionContext extensionContext) {
       return Stream.of(
-        Arguments.of("abc", new String[]{"aaa", "aab", "aac", "abb", "abc", "acc", "bbb", "bbc", "bcc", "ccc"})
+        Arguments.of("abc", new String[]{"abc", "acb", "bca", "bac", "cab", "cba"})
       );
     }
   }

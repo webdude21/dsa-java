@@ -4,26 +4,29 @@ import java.util.ArrayList;
 
 class StringPermutations {
 
-  private static StringBuilder stringBuilder;
-
   static ArrayList<String> permutationsWithoutDuplicates(String input) {
-    ArrayList<String> result = new ArrayList<>();
-    stringBuilder = new StringBuilder();
+    ArrayList<String> perms = new ArrayList<>();
 
-    permutationsWithoutDuplicates(input, result, 0);
-    return result;
+    if (input.length() == 0) {
+      perms.add("");
+      return perms;
+    }
+
+    char firstChar = input.charAt(0);
+    String remainingString = input.substring(1);
+
+    ArrayList<String> words = permutationsWithoutDuplicates(remainingString);
+    for (String permutations : words) {
+      for (int i = 0; i < input.length(); i++) {
+        String s = insertCharAt(permutations, firstChar, i);
+        perms.add(s);
+      }
+    }
+
+    return perms;
   }
 
-  private static void permutationsWithoutDuplicates(String input, ArrayList<String> strings, int startIndex) {
-    if (stringBuilder.length() == input.length()) {
-      strings.add(stringBuilder.toString());
-      stringBuilder.setLength(0);
-      return;
-    }
-
-    for (int i = startIndex; i < input.length(); i++) {
-      stringBuilder.append(input.charAt(i));
-      permutationsWithoutDuplicates(input, strings, i + 1);
-    }
+  private static String insertCharAt(String word, char toInsert, int position) {
+    return word.substring(0, position) + toInsert + word.substring(position);
   }
 }
