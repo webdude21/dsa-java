@@ -48,7 +48,7 @@ public class BinaryTree<T> {
     doUnlessNull(this, node -> consumer.accept(this.value));
   }
 
-  BinaryTree<T> getLeft() {
+  private BinaryTree<T> getLeft() {
     return left;
   }
 
@@ -56,7 +56,7 @@ public class BinaryTree<T> {
     this.left = left;
   }
 
-  BinaryTree<T> getRight() {
+  private BinaryTree<T> getRight() {
     return right;
   }
 
