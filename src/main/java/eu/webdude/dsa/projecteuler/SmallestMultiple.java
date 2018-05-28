@@ -23,7 +23,7 @@ class SmallestMultiple {
   }
 
   static long solve(int limit) {
-    return lcmRange(limit);
+    return LongStream.rangeClosed(1, limit).reduce(1, SmallestMultiple::lcm);
   }
 
   private static long gcd(long a, long b) {
@@ -32,9 +32,5 @@ class SmallestMultiple {
 
   private static long lcm(long a, long b) {
     return a * (b / gcd(a, b));
-  }
-
-  private static long lcmRange(int limit) {
-    return LongStream.rangeClosed(1, limit).reduce(1, SmallestMultiple::lcm);
   }
 }
