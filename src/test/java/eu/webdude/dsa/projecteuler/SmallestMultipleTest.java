@@ -21,7 +21,14 @@ class SmallestMultipleTest implements ArgumentsProvider {
 
   @ParameterizedTest
   @ArgumentsSource(SmallestMultipleTest.class)
+  void solveBruteForce(int limit, int expected) {
+    Assertions.assertEquals(expected, SmallestMultiple.solveBruteForce(limit));
+  }
+
+
+  @ParameterizedTest
+  @ArgumentsSource(SmallestMultipleTest.class)
   void solve(int limit, int expected) {
-    Assertions.assertEquals(expected, SmallestMultiple.solveNaive(limit));
+    Assertions.assertEquals(expected, SmallestMultiple.solve(limit));
   }
 }

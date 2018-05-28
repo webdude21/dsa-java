@@ -4,7 +4,7 @@ import java.util.stream.LongStream;
 
 class SmallestMultiple {
 
-  static long solveNaive(int limit) {
+  static long solveBruteForce(int limit) {
     return LongStream
       .range(limit, (long) (Math.pow(limit, 10)))
       .filter(i -> isEvenlyDivisible(i, limit))
@@ -20,5 +20,27 @@ class SmallestMultiple {
     }
 
     return true;
+  }
+
+  static long solve(int limit) {
+    return lcm(limit);
+  }
+
+  private static long gcd(long a, long b) {
+    return b == 0 ? a : gcd(b, a % b);
+  }
+
+  private static long lcm(long a, long b) {
+    return a * (b / gcd(a, b));
+  }
+
+  private static long lcm(int limit) {
+    long result = 1;
+
+    for (int i = 1; i < limit; i++) {
+      result = lcm(result, i);
+    }
+
+    return result;
   }
 }
