@@ -15,7 +15,8 @@ class SumSquareDifferenceTest implements ArgumentsProvider {
   public Stream<? extends Arguments> provideArguments(ExtensionContext extensionContext) {
     return Stream.of(
       Arguments.of(10, 2640),
-      Arguments.of(100, 25164150)
+      Arguments.of(100, 25164150),
+      Arguments.of(1000, 1058313332)
     );
   }
 
@@ -23,5 +24,11 @@ class SumSquareDifferenceTest implements ArgumentsProvider {
   @ArgumentsSource(SumSquareDifferenceTest.class)
   void solve(int input, int expected) {
     Assertions.assertEquals(expected, SumSquareDifference.solve(input));
+  }
+
+  @ParameterizedTest
+  @ArgumentsSource(SumSquareDifferenceTest.class)
+  void solveBruteForce(int input, int expected) {
+    Assertions.assertEquals(expected, SumSquareDifference.solveBruteForce(input));
   }
 }
