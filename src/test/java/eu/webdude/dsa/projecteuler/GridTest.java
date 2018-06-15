@@ -3,7 +3,7 @@ package eu.webdude.dsa.projecteuler;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class LargestProductInaGridTest {
+class GridTest {
 
   private final int[][] testData = {
     {8, 2, 22, 97, 38, 15, 0, 40, 0, 75, 4, 5, 7, 78, 52, 12, 50, 77, 91, 8},
@@ -29,7 +29,23 @@ class LargestProductInaGridTest {
   };
 
   @Test
-  void largestProductInAGridTest() {
-    Assertions.assertEquals(70600674, LargestProductInaGrid.largestProduct(testData));
+  void largestProductInAGrid() {
+    Assertions.assertEquals(70600674, Grid.largestProduct(testData));
+  }
+
+  @Test
+  void smallestProductInAGrid() {
+    Assertions.assertEquals(0, Grid.smallestProduct(testData));
+  }
+
+
+  @Test
+  void largestSumInAGrid() {
+    Assertions.assertEquals(367, Grid.largestSum(testData));
+  }
+
+  @Test
+  void smallestSumInAGrid() {
+    Assertions.assertEquals(43, Grid.smallestSum(testData));
   }
 }

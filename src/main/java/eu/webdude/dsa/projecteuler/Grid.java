@@ -3,10 +3,22 @@ package eu.webdude.dsa.projecteuler;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-class LargestProductInaGrid {
+class Grid {
 
   static int largestProduct(int[][] testData) {
     return genericSolve(testData, 4, (a, b) -> a * b, Math::max, Integer.MIN_VALUE);
+  }
+
+  static int largestSum(int[][] testData) {
+    return genericSolve(testData, 4, Integer::sum, Math::max, Integer.MIN_VALUE);
+  }
+
+  static int smallestSum(int[][] testData) {
+    return genericSolve(testData, 4, Integer::sum, Math::min, Integer.MAX_VALUE);
+  }
+
+  static int smallestProduct(int[][] testData) {
+    return genericSolve(testData, 4, (a, b) -> a * b, Math::min, Integer.MAX_VALUE);
   }
 
   private static int genericSolve(int[][] input, int lineSize,
@@ -46,13 +58,12 @@ class LargestProductInaGrid {
   }
 
   private static int matrixReduce(int[][] input, int row, int col, int lineSize, BiFunction<Integer, Integer, Integer> operation, Function<Integer, Integer> direction) {
-    int accumulator = input[row][col];
+    var accumulator = input[row][col];
 
-    for (int i = 1; i < lineSize; i++) {
+    for (var i = 1; i < lineSize; i++) {
       accumulator = operation.apply(accumulator, direction.apply(i));
     }
 
     return accumulator;
   }
-
 }
